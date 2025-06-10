@@ -10,8 +10,9 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         /* Import clean fonts */
+       /* Import clean fonts */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-        
+
         /* Clean Color Variables */
         :root {
             --primary-green: #2ECC71;
@@ -67,14 +68,39 @@
             font-weight: 400;
             opacity: 0;
             animation: fadeIn 0.8s ease forwards;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* 科技感网格背景 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(46, 204, 113, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 204, 113, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
         @keyframes fadeIn {
             to { opacity: 1; }
         }
+
         html {
-                scroll-behavior: smooth;
-            }
+            scroll-behavior: smooth;
+        }
+
         /* Layout */
         main {
             max-width: 1200px;
@@ -90,25 +116,142 @@
             padding: 2rem 1.5rem;
         }
 
-        /* Hero Section - Redesigned with white background */
+        /* Hero Section - 合并科技风格 */
         .hero {
             text-align: center;
             padding: 6rem 2rem;
             background: white;
             border-radius: var(--radius-xl);
-            border: 1px solid var(--border-light);
+            border: 2px solid var(--border-light);
             position: relative;
-            min-height: 100vh;
+            min-height: 95vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 0;
+            margin: 2rem 0 0 0;
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 
+                inset 0 8px 6px -6px rgba(0, 0, 0, 0.1),
+                var(--shadow-lg);
             transform: translateY(20px);
             opacity: 0;
             animation: heroSlideIn 1s 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* 科技感线条装饰 */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 49%, rgba(46, 204, 113, 0.1) 50%, transparent 51%),
+                linear-gradient(0deg, transparent 49%, rgba(52, 152, 219, 0.1) 50%, transparent 51%);
+            background-size: 100px 100px;
+            animation: techLines 15s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes techLines {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 100px); }
+        }
+
+        /* 科技节点装饰 */
+        .tech-nodes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .tech-node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .tech-node:nth-child(1) {
+            top: 20%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .tech-node:nth-child(2) {
+            top: 30%;
+            right: 20%;
+            background: var(--primary-blue);
+            animation-delay: 1s;
+        }
+
+        .tech-node:nth-child(3) {
+            bottom: 25%;
+            left: 25%;
+            background: var(--accent-mint);
+            animation-delay: 2s;
+        }
+
+        .tech-node:nth-child(4) {
+            bottom: 35%;
+            right: 15%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+            }
+            50% { 
+                transform: scale(1.5);
+                box-shadow: 0 0 0 10px rgba(46, 204, 113, 0);
+            }
+        }
+
+        /* 连接线动画 */
+        .connection-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .connection-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-mint), transparent);
+            opacity: 0.4;
+            animation: flowLine 4s ease-in-out infinite;
+        }
+
+        .connection-line:nth-child(1) {
+            top: 25%;
+            left: 10%;
+            width: 200px;
+            animation-delay: 0s;
+        }
+
+        .connection-line:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            width: 150px;
+            animation-delay: 2s;
+        }
+
+        @keyframes flowLine {
+            0%, 100% { opacity: 0.2; width: 50px; }
+            50% { opacity: 0.8; width: 200px; }
         }
 
         @keyframes heroSlideIn {
@@ -125,7 +268,7 @@
             max-width: 900px;
         }
 
-        /* Main Title - Combined in one line */
+        /* Main Title - 合并科技风格 */
         .hero h1 {
             font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 700;
@@ -136,6 +279,7 @@
             transform: translateY(20px);
             opacity: 0;
             animation: fadeSlideIn 0.8s 0.5s forwards;
+            position: relative;
         }
 
         @keyframes fadeSlideIn {
@@ -146,10 +290,31 @@
         }
 
         .title-main {
-            background: var(--accent-mint);
+            background: linear-gradient(45deg, var(--primary-green), var(--accent-mint));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            position: relative;
+        }
+
+        /* 标题装饰线 */
+        .title-main::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-mint));
+            border-radius: 1px;
+            animation: expandLine 1s 1.5s ease-out forwards;
+            transform-origin: center;
+            scale: 0;
+        }
+
+        @keyframes expandLine {
+            to { scale: 1; }
         }
 
         .hero h2 {
@@ -163,196 +328,166 @@
             opacity: 0;
             animation: fadeSlideIn 0.8s 0.7s forwards;
         }
+
         /* Video Showcase Styles */
-    .video-showcase {
-        padding: 0;
-        margin-bottom: 3rem;
-        overflow: hidden;
-        transition: transform 0.5s ease, box-shadow 0.5s ease;
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    }
+        .video-showcase {
+            padding: 0;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
 
-    .video-showcase:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-xl);
-    }
+        .video-showcase:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
 
-    .video-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 2rem 2rem 1.5rem;
-        border-bottom: 1px solid var(--border-light);
-        background: linear-gradient(90deg, var(--neutral-50), transparent);
-    }
-
-    .video-header h3 {
-        font-size: 1.4rem;
-        font-weight: 600;
-        color: var(--text-primary);
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin: 0;
-    }
-
-    .video-header h3 i {
-        color: var(--primary-green);
-        font-size: 1.2rem;
-    }
-
-    .video-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: var(--radius-md);
-        font-size: 0.85rem;
-        font-weight: 500;
-        box-shadow: var(--shadow-sm);
-        transition: var(--transition);
-    }
-
-    .video-badge:hover {
-        transform: scale(1.05);
-        box-shadow: var(--shadow-md);
-    }
-
-    .video-container {
-        position: relative;
-        padding: 2rem;
-        background: var(--neutral-50);
-    }
-
-    .video-container video {
-        width: 100%;
-        height: auto;
-        max-height: 600px;
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-lg);
-        transition: var(--transition);
-        background: #000;
-    }
-
-    .video-container video:hover {
-        box-shadow: var(--shadow-xl);
-        transform: scale(1.02);
-    }
-
-    /* Custom video controls styling */
-    .video-container video::-webkit-media-controls-panel {
-        background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    }
-
-    .video-fallback {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 3rem;
-        text-align: center;
-        background: var(--neutral-100);
-        border-radius: var(--radius-lg);
-        min-height: 300px;
-    }
-
-    .video-fallback i {
-        font-size: 3rem;
-        color: var(--accent-orange);
-        margin-bottom: 1rem;
-    }
-
-    .video-fallback p {
-        color: var(--text-secondary);
-        margin-bottom: 1.5rem;
-        font-size: 1.1rem;
-    }
-
-    .video-info {
-        padding: 1.5rem 2rem 2rem;
-    }
-
-    .video-description {
-        color: var(--text-secondary);
-        font-size: 1rem;
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-        text-align: center;
-    }
-
-    .video-features {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        flex-wrap: wrap;
-    }
-
-    .video-feature {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.75rem 1.25rem;
-        background: white;
-        border: 1px solid var(--border-light);
-        border-radius: var(--radius-md);
-        font-size: 0.9rem;
-        font-weight: 500;
-        color: var(--text-primary);
-        transition: var(--transition);
-        box-shadow: var(--shadow-sm);
-    }
-
-    .video-feature:hover {
-        background: var(--primary-green);
-        color: white;
-        border-color: var(--primary-green);
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-md);
-    }
-
-    .video-feature i {
-        color: var(--primary-green);
-        font-size: 0.9rem;
-        transition: var(--transition);
-    }
-
-    .video-feature:hover i {
-        color: white;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
         .video-header {
-            flex-direction: column;
-            gap: 1rem;
-            text-align: center;
-            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 2rem 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+            background: linear-gradient(90deg, var(--neutral-50), transparent);
         }
-        
-        .video-container {
-            padding: 1rem;
-        }
-        
-        .video-container video {
-            max-height: 300px;
-        }
-        
-        .video-features {
-            flex-direction: column;
+
+        .video-header h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
             align-items: center;
             gap: 0.75rem;
+            margin: 0;
         }
-        
-        .video-feature {
-            width: 100%;
-            max-width: 250px;
-            justify-content: center;
-        }
-    }
 
-        /* Feature Highlights */
+        .video-header h3 i {
+            color: var(--primary-green);
+            font-size: 1.2rem;
+        }
+
+        .video-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .video-badge:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        .video-container {
+            position: relative;
+            padding: 2rem;
+            background: var(--neutral-50);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            max-height: 600px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            background: #000;
+        }
+
+        .video-container video:hover {
+            box-shadow: var(--shadow-xl);
+            transform: scale(1.02);
+        }
+
+        .video-container video::-webkit-media-controls-panel {
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+        }
+
+        .video-fallback {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            text-align: center;
+            background: var(--neutral-100);
+            border-radius: var(--radius-lg);
+            min-height: 300px;
+        }
+
+        .video-fallback i {
+            font-size: 3rem;
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
+        }
+
+        .video-fallback p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .video-info {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .video-description {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .video-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .video-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .video-feature:hover {
+            background: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .video-feature i {
+            color: var(--primary-green);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .video-feature:hover i {
+            color: white;
+        }
+
+        /* Feature Highlights - 合并科技风格 */
         .hero-features {
             display: flex;
             justify-content: center;
@@ -374,6 +509,41 @@
             transform: scale(0.9);
             opacity: 0;
             animation: popIn 0.6s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 科技感边框动画 */
+        .hero-feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-green), transparent);
+            transition: var(--transition);
+        }
+
+        .hero-feature:hover::before {
+            left: 100%;
+            transition: left 0.8s ease;
+        }
+
+        .hero-feature::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(46, 204, 113, 0.02), rgba(26, 188, 156, 0.02));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .hero-feature:hover::after {
+            opacity: 1;
         }
 
         @keyframes popIn {
@@ -398,6 +568,7 @@
         .hero-feature:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
+            border-color: var(--primary-green);
         }
 
         .hero-feature i {
@@ -409,9 +580,11 @@
             font-size: 0.9rem;
             font-weight: 500;
             color: var(--text-primary);
+            position: relative;
+            z-index: 1;
         }
 
-        /* Clean Buttons */
+        /* Clean Buttons - 合并科技风格 */
         .nav-buttons {
             display: flex;
             justify-content: center;
@@ -449,7 +622,11 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(46, 204, 113, 0.1), transparent);
-            transition: var(--transition);
+            transition: left 0.6s ease;
+        }
+
+        .button:hover:before {
+            left: 100%;
         }
 
         .button:hover {
@@ -457,10 +634,6 @@
             box-shadow: var(--shadow-xl);
             border-color: var(--primary-green);
             color: var(--primary-green);
-        }
-
-        .button:hover:before {
-            left: 100%;
         }
 
         .button.primary {
@@ -536,9 +709,15 @@
             padding: 2rem;
             margin-bottom: 3rem;
             box-shadow: var(--shadow-lg);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
         }
 
-        /* Feature Grid - 强制4个卡片一排 */
+        .chart-showcase:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Feature Grid */
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -1033,23 +1212,6 @@
             margin-right: 0.5rem;
         }
 
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .feature-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .implementation-grid,
-            .benchmark-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .chart-container {
-                height: 500px;
-                padding: 1.5rem;
-            }
-        }
-
         /* View Toggle Controls */
         .view-toggle-controls {
             display: flex;
@@ -1088,7 +1250,7 @@
         .view-toggle-btn i {
             font-size: 1.1rem;
         }
-        
+
         /* Framework View Control */
         .framework-view {
             display: none;
@@ -1098,7 +1260,7 @@
         .framework-view.active {
             display: block;
         }
-        
+
         /* Scrollbar Styling */
         ::-webkit-scrollbar {
             width: 8px;
@@ -1119,27 +1281,34 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--neutral-400);
         }
-        
+
         /* Animations for scroll */
         .animate-on-scroll {
             transform: translateY(20px);
             opacity: 0;
             transition: transform 0.6s ease, opacity 0.6s ease;
         }
-        
+
         .animate-on-scroll.animated {
             transform: translateY(0);
             opacity: 1;
         }
-        
-        /* Chart animations */
-        .chart-showcase {
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-        }
-        
-        .chart-showcase:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .implementation-grid,
+            .benchmark-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .chart-container {
+                height: 500px;
+                padding: 1.5rem;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1183,8 +1352,7 @@
                 padding: 1rem;
             }
 
-
-            .implementation-grid
+            .implementation-grid,
             .feature-grid,
             .benchmark-grid {
                 grid-template-columns: 1fr;
@@ -1209,6 +1377,37 @@
             .modern-table {
                 min-width: 800px;
             }
+
+            .connection-line {
+                display: none;
+            }
+
+            .video-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+                padding: 1.5rem;
+            }
+            
+            .video-container {
+                padding: 1rem;
+            }
+            
+            .video-container video {
+                max-height: 300px;
+            }
+            
+            .video-features {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            
+            .video-feature {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -1216,6 +1415,20 @@
     <main>
         <!-- Hero Section - Redesigned -->
         <section class="hero">
+            <!-- 科技节点装饰 -->
+            <div class="tech-nodes">
+                <div class="tech-node"></div>
+                <div class="tech-node"></div>
+                <div class="tech-node"></div>
+                <div class="tech-node"></div>
+            </div>
+            
+            <!-- 连接线装饰 -->
+            <div class="connection-lines">
+                <div class="connection-line"></div>
+                <div class="connection-line"></div>
+            </div>
+            
             <div class="hero-content">
                 <h1><span class="title-main">LOOM-Scope：LOng-cOntext Model evaluation framework</span></h1>
                 <h2>Next-generation framework for comprehensive long-context model evaluation with cutting-edge visualization and analysis tools</h2>
@@ -1223,7 +1436,7 @@
                 <div class="hero-features">
                     <div class="hero-feature">
                         <i class="fas fa-layer-group"></i>
-                        <span>15 Benchmarks</span>
+                        <span>21 Benchmarks</span>
                     </div>
                     <div class="hero-feature">
                         <i class="fas fa-bolt"></i>
@@ -1331,7 +1544,6 @@
                 </div>
             </div>
         </section>
-
         <section class="framework-exploration content-section">
             <div class="section-header animate-on-scroll">
                 <h2>Framework Exploration</h2>
