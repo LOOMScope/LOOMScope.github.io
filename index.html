@@ -71,6 +71,8 @@
             min-height: 100vh;
             position: relative;
         }
+
+        /* 科技感网格背景 */
         body::before {
             content: '';
             position: fixed;
@@ -330,12 +332,27 @@
         /* Video Showcase Styles */
         .video-showcase {
             padding: 0;
-            margin-bottom: 3rem;
+            margin-bottom: 1rem;
             overflow: hidden;
             transition: transform 0.5s ease, box-shadow 0.5s ease;
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
         }
+        .video-showcase h2 {
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            text-align: center;
+        }
 
+        .video-showcase p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
         .video-showcase:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-xl);
@@ -393,7 +410,7 @@
         .video-container video {
             width: 100%;
             height: auto;
-            max-height: 600px;
+            max-height: 550px;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-lg);
             transition: var(--transition);
@@ -440,8 +457,8 @@
         .video-description {
             color: var(--text-secondary);
             font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
+            line-height: 1;
+            margin-bottom: 0rem;
             text-align: center;
         }
 
@@ -675,7 +692,7 @@
         .section-header p {
             font-size: 1.05rem;
             color: var(--text-secondary);
-            max-width: 600px;
+            max-width: 1000px;
             margin: 0 auto;
             line-height: 1.6;
         }
@@ -1407,12 +1424,107 @@
                 justify-content: center;
             }
         }
+        /* Demo Video Section - 覆盖Tailwind类并美化 */
+        .introduction.content-section.mt-20 {
+            min-height: auto vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #demo-video {
+            scroll-margin-top: 20vh; /* 跳转时让section在视窗中央 */
+            width: 150%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+        }
+
+        /* 覆盖Tailwind类样式 */
+        .mt-16 { margin-top: 0 !important; }
+        .mx-auto { margin-left: auto !important; margin-right: auto !important; }
+        .max-w-5xl { max-width: 1200px !important; }
+        .text-center { text-align: center !important; }
+        .mb-4 { margin-bottom: 1rem !important; }
+        .mb-8 { margin-bottom: 1rem !important; }
+        .mt-6 { margin-top: 1rem !important; }
+        .max-w-2xl { max-width: 42rem !important; }
+
+        /* 标题样式美化 */
+        .text-\[clamp\(1\.75rem\,4vw\,2\.25rem\)\] {
+            font-size: clamp(2rem, 5vw, 2.75rem) !important;
+            font-weight: 700 !important;
+            color: var(--text-primary) !important;
+            font-family: 'Inter', sans-serif !important;
+            letter-spacing: -0.02em !important;
+            line-height: 1.2 !important;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-mint)) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+            margin-bottom: 1.5rem !important;
+        }
+
+        /* 描述文字样式 */
+        .text-gray-600 {
+            color: var(--text-secondary) !important;
+            font-size: 1.15rem !important;
+            font-weight: 400 !important;
+            line-height: 1.5 !important;
+            margin: 0 auto 1rem !important;
+            max-width: 600px !important;
+        }
+
+        /* 视频容器样式 */
+        .rounded-xl { border-radius: var(--radius-lg) !important; }
+        .overflow-hidden { overflow: hidden !important; }
+        .shadow-2xl { box-shadow: var(--shadow-xl) !important; }
+        .transform { transform: translateZ(0) !important; }
+        .transition-all { transition: all 0.3s ease !important; }
+        .hover\:shadow-3xl:hover { box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25) !important; }
+
+        .video-container {
+            position: relative;
+            background: #000;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--radius-lg);
+        }
+
+        /* 视频fallback样式 */
+        .absolute { position: absolute !important; }
+        .inset-0 { top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; }
+        .flex { display: flex !important; }
+        .items-center { align-items: center !important; }
+        .justify-center { justify-content: center !important; }
+        .bg-gray-900 { background-color: #1a1a1a !important; }
+        .text-white { color: white !important; }
+        .text-lg { font-size: 1.125rem !important; }
+
+        .text-gray-700 {
+            color: var(--text-secondary) !important;
+            font-size: 1rem !important;
+            font-style: italic !important;
+            opacity: 0.8 !important;
+        }
+        }
     </style>
 </head>
 <body>
     <main>
         <!-- Hero Section - Redesigned -->
         <section class="hero">
+            <!-- 科技节点装饰 -->
             <div class="tech-nodes">
                 <div class="tech-node"></div>
                 <div class="tech-node"></div>
@@ -1420,6 +1532,7 @@
                 <div class="tech-node"></div>
             </div>
             
+            <!-- 连接线装饰 -->
             <div class="connection-lines">
                 <div class="connection-line"></div>
                 <div class="connection-line"></div>
@@ -1465,28 +1578,30 @@
             </div>
         </section>
 
-        <section class="introduction content-section">
-            <div class="section-header animate-on-scroll">
-                <h2>LOOM-Scope Framework Demo</h2>
-                <p>Watch our comprehensive demonstration showcasing the complete evaluation workflow and interactive capabilities</p>
-            </div>
-            
-            <div id="demo-video" class="video-showcase clean-card animate-on-scroll">
-                <div class="video-container">
+        <!-- Demo Video Section -->
+        <section class="introduction content-section mt-20">
+            <div id="demo-video" class="video-showcase clean-card animate-on-scroll mt-16 mx-auto max-w-5xl">
+                <h2 class="text-center text-[clamp(1.75rem,4vw,2.25rem)] font-semibold text-gray-800 mb-2">
+                    LOOM-Scope Demonstration
+                </h2>
+                <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">
+                    Watch our comprehensive demonstration showcasing the complete evaluation workflow and interactive capabilities
+                </p>
+                <div class="video-container rounded-xl overflow-hidden shadow-2xl transform transition-all duration-300 hover:shadow-3xl">
                     <video 
                         width="100%" 
-                        height="100%" 
+                        height="auto" 
                         controls 
                         preload="metadata"
                         poster="">
-                        <source src="./demo.mp4" type="video/mp4">
-                        <div class="video-fallback">
-                            <p>Your browser does not support the video tag.</p>
+                        <source src="demo.mp4" type="video/mp4">
+                        <div class="video-fallback absolute inset-0 flex items-center justify-center bg-gray-900">
+                            <p class="text-white text-lg">Your browser does not support the video tag.</p>
                         </div>
                     </video>
                 </div>
-                <div class="video-info">
-                    <p class="video-description">
+                <div class="video-info mt-6 text-center">
+                    <p class="video-description text-gray-700 text-lg">
                         Comprehensive walkthrough of LOOM-Scope's benchmark suite and performance analytics
                     </p>
                 </div>
@@ -1561,8 +1676,8 @@
             <!-- Benchmark View -->
             <div id="benchmarks-framework-view" class="framework-view active">
                 <div class="benchmark-controls animate-on-scroll">
-                    <button class="benchmark-btn active" data-ability="Faithfulness">Faithfulness</button>
-                    <button class="benchmark-btn" data-ability="General">General</button>
+                    <button class="benchmark-btn active" data-ability="General">General</button>
+                    <button class="benchmark-btn" data-ability="Faithfulness">Faithfulness</button>
                     <button class="benchmark-btn" data-ability="Reasoning">Reasoning</button>
                     <button class="benchmark-btn" data-ability="Retrieve">Retrieve</button>
                     <button class="benchmark-btn" data-ability="Generation">Generation</button>
@@ -1602,8 +1717,8 @@
             
             <div class="capability-controls animate-on-scroll">
                 <button class="capability-btn active" data-capability="overview">Overview</button>
-                <button class="capability-btn" data-capability="faithfulness">Faithfulness</button>
                 <button class="capability-btn" data-capability="general">General</button>
+                <button class="capability-btn" data-capability="faithfulness">Faithfulness</button>
                 <button class="capability-btn" data-capability="reasoning">Reasoning</button>
                 <button class="capability-btn" data-capability="retrieval">Retrieval</button>
                 <button class="capability-btn" data-capability="generation">Generation</button>
@@ -1825,12 +1940,7 @@
     <script>
         // Benchmark descriptions data
         const benchmarkData = {
-            "Faithfulness": [
-                {
-                    name: "L-CiteEval",
-                    description: "Evaluates long-context models' ability to faithfully leverage context for citation-based tasks across 5 categories (QA, summarization, dialogue, etc.) measuring citation precision and recall."
-                }
-            ],
+
             "General": [
                 {
                     name: "LEval",
@@ -1851,6 +1961,12 @@
                 {
                     name: "Babilong", 
                     description: "Creates scalable 'needle-in-haystack' tests by hiding bAbI facts in PG19 book text, evaluating basic reasoning with context lengths up to millions of tokens."
+                }
+            ],
+            "Faithfulness": [
+                {
+                    name: "L-CiteEval",
+                    description: "Evaluates long-context models' ability to faithfully leverage context for citation-based tasks across 5 categories (QA, summarization, dialogue, etc.) measuring citation precision and recall."
                 }
             ],
             "Reasoning": [
@@ -1900,7 +2016,7 @@
         };
 
         // Benchmark state
-        let currentAbility = "Faithfulness";
+        let currentAbility = "General";
 
         // Sunburst Chart Data and Configuration - Kawaii Theme
         function initSunburstChart() {
@@ -2245,24 +2361,15 @@
                         { name: "Rank", type: "fixed", sortable: true },
                         { name: "Model", type: "fixed", sortable: false },
                         { name: "Avg Score", type: "fixed", sortable: true },
-                        { name: "Faithfulness", type: "capability", sortable: true },
                         { name: "General", type: "capability", sortable: true },
+                        { name: "Faithfulness", type: "capability", sortable: true },
                         { name: "Reasoning", type: "capability", sortable: true },
                         { name: "Retrieval", type: "capability", sortable: true },
                         { name: "Generation", type: "capability", sortable: true },
                         { name: "Specialization", type: "capability", sortable: true }
                     ]
                 },
-                "faithfulness": {
-                    "tests": ["L_CiteEval"],
-                    "description": "Evaluates model consistency with source information, measuring accuracy in citation and avoiding hallucinations.",
-                    "columns": [
-                        { name: "Rank", type: "fixed", sortable: true },
-                        { name: "Model", type: "fixed", sortable: false },
-                        { name: "Avg Score", type: "fixed", sortable: true },
-                        { name: "L_CiteEval", type: "test", sortable: true }
-                    ]
-                },
+
                 "general": {
                     "tests": ["LEval", "LooGLE", "RULER", "longbench"],
                     "description": "Comprehensive assessment of common NLP tasks including text understanding, classification, and information extraction.",
@@ -2274,6 +2381,16 @@
                         { name: "LooGLE", type: "test", sortable: true },
                         { name: "RULER", type: "test", sortable: true },
                         { name: "longbench", type: "test", sortable: true }
+                    ]
+                },
+                "faithfulness": {
+                    "tests": ["L_CiteEval"],
+                    "description": "Evaluates model consistency with source information, measuring accuracy in citation and avoiding hallucinations.",
+                    "columns": [
+                        { name: "Rank", type: "fixed", sortable: true },
+                        { name: "Model", type: "fixed", sortable: false },
+                        { name: "Avg Score", type: "fixed", sortable: true },
+                        { name: "L_CiteEval", type: "test", sortable: true }
                     ]
                 },
                 "reasoning": {
@@ -2529,7 +2646,7 @@
                         td.textContent = getAvgScore(model).toFixed(2);
                         td.style.fontWeight = "bold";
                     } else if (currentCapability === "overview" && 
-                              ["Faithfulness", "General", "Reasoning", "Retrieval", "Generation", "Specialization"].includes(col.name)) {
+                              ["General","Faithfulness",  "Reasoning", "Retrieval", "Generation", "Specialization"].includes(col.name)) {
                         td.textContent = getCapabilityScore(model, col.name).toFixed(2);
                     } else if (modelData.capabilities[currentCapability].tests) {
                         const normalizedColName = col.name.replace(/-/g, '_');
@@ -2885,6 +3002,7 @@
             // Observe elements for scroll animations
             observeElements();
         });
+        
     </script>
 </body>
 </html>
