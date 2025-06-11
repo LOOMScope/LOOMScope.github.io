@@ -3052,12 +3052,14 @@
             if (window.location.hash === '#demo-video') {
                 setTimeout(() => {
                     scrollToCenter('.introduction.content-section.mt-20');
-                }, 100); 
+                }, 100); // 稍微延迟，确保页面完全加载
             }
+            
+            // 其他现有的初始化代码...
             initFrameworkEventListeners();
             renderBenchmarkCards();
-            renderImplementationCards();  
+            renderImplementationCards();
         });
     </script>
-</body>4
+</body>
 </html>
