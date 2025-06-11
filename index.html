@@ -58,6 +58,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: white;
@@ -116,15 +117,23 @@
         }
 
         /* Hero Section - 合并科技风格 */
+/* 
+    padding: 2rem 1.5rem;                 
+    min-height: auto;                       
+    border: 1px solid var(--border-light); 
+    border-radius: var(--radius-lg);       
+    box-shadow: var(--shadow-md);            
+} */
         .hero {
+            max-width: 68vw;
             text-align: center;
-            padding: 6rem 2rem;
+            padding: 2rem 1.5rem;  
             background: white;
+            
             border-radius: var(--radius-xl);
             border: 2px solid var(--border-light);
             position: relative;
             min-height: 95vh;
-            max-width: 68vw;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -139,6 +148,7 @@
             animation: heroSlideIn 1s 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
+        /* 科技感线条装饰 */
         .hero::before {
             content: '';
             position: absolute;
@@ -1593,7 +1603,7 @@
                         controls 
                         preload="metadata"
                         poster="">
-                        <source src="demo.mp4" type="video/mp4">
+                        <source src="./demo.mp4" type="video/mp4">
                         <div class="video-fallback absolute inset-0 flex items-center justify-center bg-gray-900">
                             <p class="text-white text-lg">Your browser does not support the video tag.</p>
                         </div>
@@ -3044,10 +3054,12 @@
                     scrollToCenter('.introduction.content-section.mt-20');
                 }, 100); // 稍微延迟，确保页面完全加载
             }
+            
             // 其他现有的初始化代码...
             initFrameworkEventListeners();
             renderBenchmarkCards();
             renderImplementationCards();
+            
         });
     </script>
 </body>
