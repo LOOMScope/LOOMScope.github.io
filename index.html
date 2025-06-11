@@ -3002,7 +3002,57 @@
             // Observe elements for scroll animations
             observeElements();
         });
-        
+        // 在现有JavaScript代码末尾添加以下代码
+
+        // 平滑滚动到section中央的函数
+        function scrollToCenter(targetSelector) {
+            const targetElement = document.querySelector(targetSelector);
+            if (!targetElement) return;
+            
+            // 获取目标元素的位置信息
+            const elementRect = targetElement.getBoundingClientRect();
+            const elementTop = elementRect.top + window.pageYOffset;
+            const elementHeight = elementRect.height;
+            const windowHeight = window.innerHeight;
+            
+            // 计算要滚动到的位置（让元素中心位于视窗中心）
+            const targetScrollTop = elementTop + (elementHeight / 2) - (windowHeight / 2);
+            
+            // 平滑滚动
+            window.scrollTo({
+                top: Math.max(0, targetScrollTop), // 确保不会滚动到负数位置
+                behavior: 'smooth'
+            });
+        }
+
+        // 重写点击事件处理
+        document.addEventListener('DOMContentLoaded', function() {
+            // 找到所有指向#demo-video的链接
+            const demoVideoLinks = document.querySelectorAll('a[href="#demo-video"]');
+            
+            demoVideoLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); // 阻止默认的锚点跳转
+                    
+                    // 跳转到section的中央
+                    scrollToCenter('.introduction.content-section.mt-20');
+                });
+            });
+            
+            // 如果URL中包含#demo-video，也执行跳转
+            if (window.location.hash === '#demo-video') {
+                setTimeout(() => {
+                    scrollToCenter('.introduction.content-section.mt-20');
+                }, 100); // 稍微延迟，确保页面完全加载
+            }
+            
+            // 其他现有的初始化代码...
+            initFrameworkEventListeners();
+            renderBenchmarkCards();
+            renderImplementationCards();
+            
+            // 其余代码保持不变...
+        });
     </script>
 </body>
 </html>
