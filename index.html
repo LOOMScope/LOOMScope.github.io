@@ -1676,7 +1676,7 @@
                 </button>
                 <button class="view-toggle-btn" data-framework="implementations">
                     <i class="fas fa-cogs"></i>
-                    Implementation Methods
+                    Augmentation Methods
                 </button>
             </div>
             
@@ -1699,14 +1699,9 @@
             <!-- Implementation View -->
             <div id="implementations-framework-view" class="framework-view">
                 <div class="implementation-controls animate-on-scroll">
-                    <button class="implementation-btn active" data-ability="hf_models">HF_Models</button>
-                    <button class="implementation-btn" data-ability="server">Server</button>
-                    <button class="implementation-btn" data-ability="sparse_attention">Sparse Attention</button>
-                    <button class="implementation-btn" data-ability="token_eviction">Token Eviction</button>
-                    <button class="implementation-btn" data-ability="layer_wise">Layer-wise</button>
-                    <button class="implementation-btn" data-ability="quantization">Quantization</button>
-                    <button class="implementation-btn" data-ability="hybird">Hybrid</button>
-                    <button class="implementation-btn" data-ability="token_merge">Token Merge</button>
+                    <button class="implementation-btn active" data-ability="models">Supporting Platform</button>
+                    <button class="implementation-btn" data-ability="sparse_attention">Training-free Sparse Attention</button>
+                    <button class="implementation-btn" data-ability="token_eviction">KV Cache Optimization</button>
                 </div>
                 
                 <div id="implementation-grid" class="implementation-grid">
@@ -2202,13 +2197,11 @@
             });
         }
         const implementationData = {
-            "hf_models": [
+            "models": [
                 {
                     name: "HF_Models",
                     description: "A collection of Hugging Face models optimized for long-context tasks, including Qwen3 and Llama series, with support for PEFT adapters."
-                }
-            ],
-            "server": [
+                },
                 {
                     name: "VLLM",
                     description: "A high-performance inference engine for large language models, supporting long-context tasks with efficient memory management and acceleration techniques."
@@ -2216,6 +2209,10 @@
                 {
                     name: "SGLang", 
                     description: "A server-side framework for deploying long-context models with advanced features like dynamic context management and real-time performance monitoring."
+                },
+                {
+                    name: "API", 
+                    description: "External API services for long-context model inference, including OpenAI API, Anthropic Claude API, and other third-party model serving platforms."
                 }
             ],
             "sparse_attention": [
@@ -2244,9 +2241,7 @@
                 {
                     name: "L2Compress",
                     description: "A compression technique that reduces the memory footprint of long-context models by intelligently evicting less critical tokens, enabling efficient processing of large inputs."
-                }
-            ],
-            "layer_wise": [
+                },
                 {
                     name: "PyramidKV",
                     description: "A layer-wise attention mechanism that optimizes long-context processing by dynamically adjusting attention across different layers, improving model efficiency and performance."
@@ -2254,21 +2249,15 @@
                 {
                     name: "CakeKV",
                     description: "A layer-wise attention strategy that enhances long-context model performance by distributing attention across multiple layers, allowing for better context understanding and memory management."
-                }
-            ],
-            "quantization": [
+                },
                 {
                     name: "KIVI", 
                     description: "A quantization framework that optimizes long-context models by reducing precision while maintaining performance, enabling efficient deployment on resource-constrained devices."
-                }
-            ],
-            "hybird": [
+                },
                 {
                     name: "ThinK", 
                     description: "A hybrid approach combining token eviction and quantization attention to optimize long-context model performance, balancing memory usage and computational efficiency."
-                }
-            ],
-            "token_merge": [
+                },
                 {
                     name: "CaM", 
                     description: "A token merging technique that reduces the number of tokens in long-context models by intelligently combining similar tokens, enhancing processing efficiency and memory usage."
@@ -2276,7 +2265,7 @@
             ]
         };
 
-        let currentImplementation = "hf_models";
+        let currentImplementation = "models";
 
         function renderImplementationCards() {
             const container = document.getElementById('implementation-grid');
