@@ -1049,7 +1049,14 @@
             color: var(--secondary-blue);
             border: 1px solid #BBDEFB;
         }
-
+        .model-label.Other {
+            background: #95e1d3;
+            color: #333;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            border: 2px solid rgba(149, 225, 211, 0.3);
+        }
         .model-label:hover {
             transform: scale(1.05);
             box-shadow: var(--shadow-md);
@@ -1089,13 +1096,16 @@
             border-radius: 50%;
             box-shadow: var(--shadow-sm);
         }
-
         .legend-color.Qwen {
-            background: var(--secondary-green);
+            background: #98FB98;
         }
 
         .legend-color.Llama {
-            background: var(--secondary-blue);
+            background: #87CEEB;
+        }
+
+        .legend-color.Other {
+            background: #006400;
         }
 
         /* Model Comparison */
@@ -1524,8 +1534,113 @@
             font-style: italic !important;
             opacity: 0.8 !important;
         }
-                /* 为 benchmark 链接添加样式 */
-       
+        .benchmark-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benchmark-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .benchmark-link:hover::before {
+            left: 100%;
+        }
+
+        .benchmark-link:hover {
+            background: var(--secondary-blue);
+            transform: translateX(5px) scale(1.05);
+            box-shadow: var(--shadow-md);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* 添加一个小图标指示这是外部链接 */
+        .benchmark-link::after {
+            content: "🔗";
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .benchmark-link:hover::after {
+            opacity: 1;
+            transform: rotate(15deg);
+        }
+                /* 为 implementation 链接添加样式 */
+        .implementation-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: var(--accent-mint);
+            color: white;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .implementation-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .implementation-link:hover::before {
+            left: 100%;
+        }
+
+        .implementation-link:hover {
+            background: var(--primary-green);
+            transform: translateX(5px) scale(1.05);
+            box-shadow: var(--shadow-md);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* 添加一个小图标指示这是外部链接 */
+        .implementation-link::after {
+            content: "⚙️";
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .implementation-link:hover::after {
+            opacity: 1;
+            transform: rotate(180deg);
+        }
         }
     </style>
 </head>
@@ -1636,7 +1751,7 @@
                         <i class="fas fa-layer-group"></i>
                     </div>
                     <h3>Comprehensive Suite</h3>
-                    <p>15 standard long-context benchmarks covering faithfulness, retrieval, reasoning, generation, and specialized tasks with hundreds of subtasks.</p>
+                    <p>21 standard long-context benchmarks covering faithfulness, retrieval, reasoning, generation, and specialized tasks with hundreds of subtasks.</p>
                 </div>
                 
                 <div class="feature-card clean-card animate-on-scroll">
@@ -1678,7 +1793,7 @@
                 </button>
                 <button class="view-toggle-btn" data-framework="implementations">
                     <i class="fas fa-cogs"></i>
-                    Implementation Methods
+                    Augmentation Methods
                 </button>
             </div>
             
@@ -1701,14 +1816,9 @@
             <!-- Implementation View -->
             <div id="implementations-framework-view" class="framework-view">
                 <div class="implementation-controls animate-on-scroll">
-                    <button class="implementation-btn active" data-ability="hf_models">HF_Models</button>
-                    <button class="implementation-btn" data-ability="server">Server</button>
-                    <button class="implementation-btn" data-ability="sparse_attention">Sparse Attention</button>
-                    <button class="implementation-btn" data-ability="token_eviction">Token Eviction</button>
-                    <button class="implementation-btn" data-ability="layer_wise">Layer-wise</button>
-                    <button class="implementation-btn" data-ability="quantization">Quantization</button>
-                    <button class="implementation-btn" data-ability="hybird">Hybrid</button>
-                    <button class="implementation-btn" data-ability="token_merge">Token Merge</button>
+                    <button class="implementation-btn active" data-ability="models">Supporting Platform</button>
+                    <button class="implementation-btn" data-ability="sparse_attention">Training-free Sparse Attention</button>
+                    <button class="implementation-btn" data-ability="token_eviction">KV Cache Optimization</button>
                 </div>
                 
                 <div id="implementation-grid" class="implementation-grid">
@@ -1747,14 +1857,18 @@
             </div>
             
             <div class="legend animate-on-scroll">
-                <div class="legend-item">
-                    <div class="legend-color Qwen"></div>
-                    <span>Qwen Model Series</span>
+                <div class="legend-item">                     
+                    <div class="legend-color Qwen"></div>                     
+                    <span>Qwen Model Series</span>                 
+                </div>                 
+                <div class="legend-item">                     
+                    <div class="legend-color Llama"></div>                     
+                    <span>Llama Model Series</span>                 
                 </div>
-                <div class="legend-item">
-                    <div class="legend-color Llama"></div>
-                    <span>Llama Model Series</span>
-                </div>
+                <div class="legend-item">                     
+                    <div class="legend-color Other"></div>                     
+                    <span>Other Model Series</span>                 
+                </div>             
             </div>
         </section>
 
@@ -1795,7 +1909,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td rowspan="5">Reasoning</td>
+                            <td rowspan="6">Reasoning</td>
                             <td>babilong</td>
                             <td><span class="model-label Llama">Llama-3.1-8B-Instruct</span></td>
                             <td><strong style="color: var(--primary-green);">57.0</strong></td>
@@ -1831,7 +1945,15 @@
                             <td style="color: #E74C3C;">-0.1</td>
                         </tr>
                         <tr>
-                            <td rowspan="4">General</td>
+                            <td>Ada-LEval</td>
+                            <td><span class="model-label Qwen">ChatGLM3-6B-32k</span></td>
+                            <td><strong style="color: var(--primary-green);">6.9</strong></td>
+                            <td>6.8</td>
+                            <td style="color: #E74C3C;">0.1</td>
+                        </tr>
+                        
+                        <tr>
+                            <td rowspan="5">General</td>
                             <td>LEval</td>
                             <td><span class="model-label Llama">Llama-3.1-8B-Instruct</span></td>
                             <td><strong style="color: var(--primary-green);">60.5</strong></td>
@@ -1860,7 +1982,14 @@
                             <td style="color: var(--secondary-green);">+2.4</td>
                         </tr>
                         <tr>
-                            <td rowspan="3">Retrieval</td>
+                            <td>RULER</td>
+                            <td><span class="model-label Qwen">ChatGLM2-32k</span></td>
+                            <td><strong style="color: var(--primary-green);">21.6</strong></td>
+                            <td>19.3</td>
+                            <td style="color: var(--secondary-green);">+2.3</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="4">Retrieval</td>
                             <td>InfiniteBench</td>
                             <td><span class="model-label Qwen">ChatGLM3-6b-128k</span></td>
                             <td><strong style="color: var(--primary-green);">24.5</strong></td>
@@ -1882,6 +2011,13 @@
                             <td style="color: #E74C3C;">-7.1</td>
                         </tr>
                         <tr>
+                            <td>NoLiMa</td>
+                            <td><span class="model-label Llama">Llama-3-8B</span></td>
+                            <td><strong style="color: var(--primary-green);">36.1</strong></td>
+                            <td>38.8</td>
+                            <td style="color: #E74C3C;">-2.7</td>
+                        </tr>
+                        <tr>
                             <td>Generation</td>
                             <td>LongWriter</td>
                             <td><span class="model-label Llama">Llama-3.1-8B-Instruct</span></td>
@@ -1890,12 +2026,33 @@
                             <td style="color: #E74C3C;">-1.8</td>
                         </tr>
                         <tr>
-                            <td>Specialization</td>
+                            <td rowspan="4">Specialization</td>
                             <td>LIBRA</td>
                             <td><span class="model-label Llama">Llama-3-8B-Instruct</span></td>
                             <td><strong style="color: var(--primary-green);">56.8</strong></td>
                             <td>57.4</td>
                             <td style="color: #E74C3C;">-0.6</td>
+                        </tr>
+                        <tr>
+                            <td>LongHealth</td>
+                            <td><span class="model-label Qwen">longchat-7b-v1.5-32k</span></td>
+                            <td><strong style="color: var(--primary-green);">11.8</strong></td>
+                            <td>9.6</td>
+                            <td style="color: #E74C3C;">+2.6</td>
+                        </tr>
+                        <tr>
+                            <td>CLongEval</td>
+                            <td><span class="model-label Qwen">chatglm3-6b</span></td>
+                            <td><strong style="color: var(--primary-green);">25.2</strong></td>
+                            <td>25.0</td>
+                            <td style="color: #E74C3C;">+0.2</td>
+                        </tr>
+                        <tr>
+                            <td>LongSafety</td>
+                            <td><span class="model-label Llama">Llama-3.1-8B-Instruct</span></td>
+                            <td><strong style="color: var(--primary-green);">13.4</strong></td>
+                            <td>11.1</td>
+                            <td style="color: #E74C3C;">+2.3</td>
                         </tr>
                         <tr>
                             <td>Faithfulness</td>
@@ -1907,18 +2064,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            
-            <div class="legend animate-on-scroll">
-                <div class="legend-item">
-                    <div class="legend-color Qwen"></div>
-                    <span>Qwen Model Series</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color Llama"></div>
-                    <span>Llama Model Series</span>
-                </div>
-            </div>
+
         </section>
 
         <!-- Citation Section -->
@@ -1948,121 +2094,262 @@
     <!-- JavaScript -->
     <script>
         // Benchmark descriptions data
-       // 在 benchmarkData 对象中为每个 benchmark 添加 githubUrl 字段
-            const benchmarkData = {
-                "General": [
-                    {
-                        name: "LEval",
-                        description: "Assesses long-context understanding through 20 diverse tasks in English and Chinese, including closed-ended reasoning and open-ended summarization challenges.",
-                        githubUrl: "https://github.com/OpenLMLab/LEval"
-                    },
-                    {
-                        name: "LooGLE", 
-                        description: "Evaluates LLMs on realistic, ultra-long documents using 6,000 questions requiring both short and long-dependency reasoning across domains like computation and timeline analysis.",
-                        githubUrl: "https://github.com/bigai-nlco/LooGLE"
-                    },
-                    {
-                        name: "RULER",
-                        description: "Measures true context capacity using configurable synthetic tasks to stress-test models beyond simple retrieval, revealing effective context limits.",
-                        githubUrl: "https://github.com/hsiehjackson/RULER"
-                    },
-                    {
-                        name: "LongBench",
-                        description: "A bilingual (English/Chinese) multitask benchmark testing comprehension across 21 real-world scenarios like document QA, summarization, and code completion, with contexts averaging 5K-15K tokens.",
-                        githubUrl: "https://github.com/THUDM/LongBench"
-                    },
-                    {
-                        name: "Babilong", 
-                        description: "Creates scalable 'needle-in-haystack' tests by hiding bAbI facts in PG19 book text, evaluating basic reasoning with context lengths up to millions of tokens.",
-                        githubUrl: "https://github.com/booydar/babilong"
-                    }
-                ],
-                "Faithfulness": [
-                    {
-                        name: "L-CiteEval",
-                        description: "Evaluates long-context models' ability to faithfully leverage context for citation-based tasks across 5 categories (QA, summarization, dialogue, etc.) measuring citation precision and recall.",
-                        githubUrl: "https://github.com/LCM-Lab/L-CITEEVAL"
-                    }
-                ],
-                "Reasoning": [
-                    {
-                        name: "Counting-Stars",
-                        description: "An evidence-intensive benchmark testing multi-evidence acquisition and reasoning with adjustable evidence positions/scalable context lengths.",
-                        githubUrl: "https://github.com/nick7nlp/Counting-Stars"
-                    },
-                    {
-                        name: "LongIns",
-                        description: "Tests instruction-following in long contexts via three settings (GIST/LIST/LIMT) using modified instruction datasets with controlled context lengths.",
-                        githubUrl: "https://github.com/Ins-Bench/LongIns-Bench"
-                    },
-                    {
-                        name: "LVEval", 
-                        description: "Challenges models with distraction-heavy contexts (up to 256K words) using keyword replacement and confusion techniques to test robust reasoning in single/multi-hop QA tasks.",
-                        githubUrl: "https://github.com/infinigence/LVEval"
-                    },
-                    {
-                        name: "LongBench v2",
-                        description: "Pushes boundaries with 500+ multiple-choice questions in 8K-2M word contexts covering code, dialogue, and structured data understanding.",
-                        githubUrl: "https://github.com/THUDM/LongBench"
-                    }
-                ],
-                "Retrieve": [
-                    {
-                        name: "NIAH",
-                        description: "Needle-in-a-Haystack places target information at varying depths/lengths to test retrieval robustness under extreme context pressure.",
-                        githubUrl: "https://github.com/gkamradt/LLMTest_NeedleInAHaystack"
-                    },
-                    {
-                        name: "NThread",
-                        description: "Evaluates 'thread tracking' ability—following interconnected information chains through near-million-token contexts.",
-                        githubUrl: "https://github.com/jonathan-roberts1/needle-threading"
-                    },
-                    {
-                        name: "InfiniteBench",
-                        description: "Specializes in 100K+ token evaluation for retrieval, math, and code tasks, far exceeding traditional benchmarks' length limits.",
-                        githubUrl: "https://github.com/OpenBMB/InfiniteBench"
-                    }
-                ],
-                "Generation": [
-                    {
-                        name: "LongWriter",
-                        description: "Benchmarks long-context generation capability, testing if models can produce coherent 10,000+ word outputs from lengthy inputs while maintaining quality.",
-                        githubUrl: "https://github.com/THUDM/LongWriter"
-                    }
-                ],
-                "Specialization": [
-                    {
-                        name: "LIBRA", 
-                        description: "Focuses on Russian language long-text analysis across specialized tasks like history QA and medical document understanding.",
-                        githubUrl: "https://github.com/ai-forever/LIBRA"
-                    }
-                ]
-            };
+        const benchmarkData = {
+            "General": [
+                {
+                    name: "LEval",
+                    description: "Comprehensive benchmark with 20 subtasks, 508 long documents, and 2,000+ query-response pairs covering 3k-200k tokens in English and Chinese.",
+                    githubUrl: "https://github.com/OpenLMLab/LEval"
+                },
+                {
+                    name: "LooGLE", 
+                    description: "Features 6,000 questions on documents averaging 24k+ tokens (many exceeding 100k), covering 7 task categories including computation and timeline reordering.",
+                    githubUrl: "https://github.com/bigai-nlco/LooGLE"
+                },
+                {
+                    name: "RULER",
+                    description: "Extends NIAH with 4 task categories (retrieval, multi-hop tracing, aggregation, QA) across 13 tasks for flexible evaluation beyond simple retrieval.",
+                    githubUrl: "https://github.com/NVIDIA/RULER"
+                },
+                {
+                    name: "LongBench",
+                    description: "First bilingual benchmark with 21 datasets across 6 task categories. LongBench v2 adds 503 challenging MCQs with 8k-2M word contexts.",
+                    githubUrl: "https://github.com/THUDM/LongBench"
+                },
+                {
+                    name: "Babilong", 
+                    description: "Scalable benchmark inserting bAbI facts into PG19 books, testing 20 reasoning tasks with contexts up to 11M tokens.",
+                    githubUrl: "https://github.com/booydar/babilong"
+                },
+                {
+                    name: "BAMBOO",
+                    description: "Multi-task benchmark with 10 datasets covering QA, hallucination detection, text sorting, language modeling, and code completion (4k-16k contexts).",
+                    githubUrl: "https://github.com/RUCAIBox/BAMBOO"
+                }
+            ],
+            "Faithfulness": [
+                {
+                    name: "L-CiteEval",
+                    description: "Evaluates citation quality across 11 tasks (8K-48K contexts), measuring both answer correctness and citation support accuracy.",
+                    githubUrl: "https://github.com/LCM-Lab/L-CITEEVAL"
+                }
+            ],
+            "Reasoning": [
+                {
+                    name: "Counting-Stars",
+                    description: "Evidence-intensive benchmark requiring models to collect multiple scattered 'stars' across long contexts with adjustable positions.",
+                    githubUrl: "https://github.com/nick7nlp/Counting-Stars"
+                },
+                {
+                    name: "LongIns",
+                    description: "Tests instruction-following via GIST/LIST/LIMT settings, evaluating error detection efficiency across 7 context lengths (256-16k tokens).",
+                    githubUrl: "https://github.com/Ins-Bench/LongIns-Bench"
+                },
+                {
+                    name: "LVEval", 
+                    description: "5-level benchmark (16k-256k) using confusion fact insertion and keyword replacement to test single/multi-hop QA with heavy distractions.",
+                    githubUrl: "https://github.com/infinigence/LVEval"
+                },
+                {
+                    name: "LongBench v2",
+                    description: "503 challenging MCQs across 6 categories with 8k-2M word contexts. Human experts achieve only 53.7% accuracy with 15-minute time limits.",
+                    githubUrl: "https://github.com/THUDM/LongBench"
+                },
+                {
+                    name: "Ada-LEval",
+                    description: "Length-adaptive benchmark with TSort and BestAnswer tasks, flexibly generating test cases up to 128k tokens.",
+                    githubUrl: "https://github.com/open-compass/Ada-LEval/tree/main"
+                }
+            ],
+            "Retrieve": [
+                {
+                    name: "NIAH",
+                    description: "Classic needle-in-haystack test placing target information at varying depths (0-100%) in long contexts to evaluate retrieval accuracy.",
+                    githubUrl: "https://github.com/gkamradt/LLMTest_NeedleInAHaystack"
+                },
+                {
+                    name: "NThread",
+                    description: "Tests thread-safe tracking of multiple interconnected information chains through contexts up to 1M tokens across 5 task types.",
+                    githubUrl: "https://github.com/jonathan-roberts1/needle-threading"
+                },
+                {
+                    name: "InfiniteBench",
+                    description: "First benchmark averaging 100K+ tokens with 12 tasks requiring long-dependency understanding beyond simple paragraph retrieval.",
+                    githubUrl: "https://github.com/OpenBMB/InfiniteBench"
+                },
+                {
+                    name: "NoLiMa",
+                    description: "Removes literal matching between questions and answers, requiring inference to locate 'needles'. Performance drops from 99.3% to 69.7% beyond 32K contexts.",
+                    githubUrl: "https://github.com/adobe-research/NoLiMa/tree/main"
+                }
+            ],
+            "Generation": [
+                {
+                    name: "LongWriter",
+                    description: "Evaluates generation of coherent 10,000+ word outputs while maintaining quality, essential for reports and creative writing applications.",
+                    githubUrl: "https://github.com/THUDM/LongWriter"
+                }
+            ],
+            "Specialization": [
+                {
+                    name: "LIBRA", 
+                    description: "Russian-focused benchmark for long-text understanding across specialized domains including history and medical documents.",
+                    githubUrl: "https://github.com/ai-forever/LIBRA"
+                },
+                {
+                    name: "LongHealth",
+                    description: "Medical domain-specific benchmark evaluating long-context comprehension in healthcare applications.",
+                    githubUrl: "https://github.com/kbressem/LongHealth/tree/main"
+                },
+                {
+                    name: "CLongEval",
+                    description: "Chinese-specific long-context benchmark testing language-specific understanding and reasoning capabilities.",
+                    githubUrl: "https://github.com/zexuanqiu/CLongEval?tab=readme-ov-file"
+                },
+                {
+                    name: "LongSafety",
+                    description: "Evaluates safety and ethical considerations in long-context scenarios, crucial for responsible AI deployment.",
+                    githubUrl: "https://github.com/thu-coai/LongSafety/tree/main"
+                }
+            ]
+        };
 
         // Benchmark state
         let currentAbility = "General";
 
         // Sunburst Chart Data and Configuration - Kawaii Theme
         function initSunburstChart() {
-            const labels = ["Synthetic Tasks", "Real-World Tasks", "S-Doc QA", "M-Doc QA", "Choose", "Long QA", "Summ", "Writing", " Synthetic Recall ", "Synthetic Recall", "Code & Math", "Code & Math ", "Cite", "ICL", " RULER", " LongIns", "LEval", "LVEval", " LongBench-V2 ", " RULER ", "Babilong ", " LongIns ", " NThread ", " Babilong", "LongIns  ", "L-Cite-Eval ", "LEval ", "LongBench ", "LooGLE ", "InfiniteBench ", " LEval", "LongWriter", " LEval ", "LVEval ", " LongBench", " LooGLE", " LIBRA", " L-Cite-Eval", "LongBench-V2", " InfiniteBench", "LIBRA ", " LongBench ", "LongBench-V2 ", "LEval  ", " LVEval ", " LongBench-V2", "RULER", "Babilong", " InfiniteBench ", "LongIns", "NThread", "L-Cite-Eval  ", "  LEval", "LVEval  ", "LongBench  ", "RULER ", "InfiniteBench  ", "LongIns ", "Counting-Stars", "   NIAH   ", "NThread ", " LIBRA ", "  LEval  ", "  LVEval  ", "  InfiniteBench  "];
-            const parents = ["", "", "Synthetic Tasks", "Synthetic Tasks", "Synthetic Tasks", "Real-World Tasks", "Real-World Tasks", "Real-World Tasks", "Synthetic Tasks", "Real-World Tasks", "Synthetic Tasks", "Real-World Tasks", "Real-World Tasks", "Real-World Tasks", "S-Doc QA", "S-Doc QA", "M-Doc QA", "M-Doc QA", "M-Doc QA", "M-Doc QA", "M-Doc QA", "M-Doc QA", "M-Doc QA", "Choose", "Choose", "Summ", "Summ", "Summ", "Summ", "Summ", "Writing", "Writing", "Synthetic Recall", "Synthetic Recall", "Synthetic Recall", "Synthetic Recall", "Synthetic Recall", "Cite", "Code & Math ", "Code & Math ", "Code & Math ", "ICL", "ICL", "Long QA", "Long QA", "Long QA", "Long QA", "Long QA", "Long QA", "Long QA", "Long QA", " Synthetic Recall ", " Synthetic Recall ", " Synthetic Recall ", " Synthetic Recall ", " Synthetic Recall ", " Synthetic Recall ", " Synthetic Recall ", " Synthetic Recall ", " Synthetic Recall ", " Synthetic Recall ", " Synthetic Recall ", "Code & Math", "Code & Math", "Code & Math"];
-            const values = [650, 650, 52, 182, 52, 200, 125, 50, 286, 125, 78, 75, 25, 50, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26];
-            
-            const trimLength = 65;
-            const labels_trimmed = labels.slice(0, trimLength);
-            const parents_trimmed = parents.slice(0, trimLength);
-            const values_trimmed = values.slice(0, trimLength);
+            // Enhanced labels with new benchmarks integrated by task type
+            const labels = [
+                // Root level
+                "Synthetic Tasks", "Real-World Tasks",
+                
+                // Synthetic Tasks children
+                "S-Doc QA", "M-Doc QA", "Choose", "Synthetic Recall", "Code & Math",
+                
+                // Real-World Tasks children
+                "Long QA", "Summ", "Writing", "Cite", "ICL",
+                
+                // S-Doc QA benchmarks
+                "RULER", "LongIns",
+                
+                // M-Doc QA benchmarks
+                "LEval", "LVEval", "LongBench-V2", "Babilong", "NThread",
+                
+                // Choose benchmarks - including Ada-LEval (TSort tasks)
+                "L-Cite-Eval", "LongBench", "Ada-LEval",
+                
+                // Synthetic Recall benchmarks - including NoLiMa (needle tasks)
+                "Counting-Stars", "NIAH", "LIBRA", "NoLiMa",
+                
+                // Code & Math benchmarks (Synthetic) - including BAMBOO code tasks
+                "LooGLE", "InfiniteBench", "BAMBOO ",
+                
+                // Long QA benchmarks - including medical, Chinese, safety QA
+                "LEval ", "LVEval ", "LongBench ", "InfiniteBench ", " BAMBOO ", "LongHealth", "CLongEval", "LongSafety",
+                
+                // Summ benchmarks
+                "LongWriter ", " LEval", "LVEval  ", "LongBench  ", "LooGLE  ",
+                
+                // Writing benchmarks - including BAMBOO text generation
+                "LongWriter", "LIBRA ", " BAMBOO",
+                
+                // Cite benchmarks
+                " L-Cite-Eval",
+                
+                // ICL benchmarks
+                " LongBench ", " LEval "
+            ];
 
-            // Organized color scheme with gradients
+            const parents = [
+                // Root level
+                "", "",
+                
+                // Synthetic Tasks children
+                "Synthetic Tasks", "Synthetic Tasks", "Synthetic Tasks", "Synthetic Tasks", "Synthetic Tasks",
+                
+                // Real-World Tasks children
+                "Real-World Tasks", "Real-World Tasks", "Real-World Tasks", "Real-World Tasks", "Real-World Tasks",
+                
+                // S-Doc QA benchmarks
+                "S-Doc QA", "S-Doc QA",
+                
+                // M-Doc QA benchmarks
+                "M-Doc QA", "M-Doc QA", "M-Doc QA", "M-Doc QA", "M-Doc QA",
+                
+                // Choose benchmarks - including Ada-LEval
+                "Choose", "Choose", "Choose",
+                
+                // Synthetic Recall benchmarks - including NoLiMa
+                "Synthetic Recall", "Synthetic Recall", "Synthetic Recall", "Synthetic Recall",
+                
+                // Code & Math benchmarks (Synthetic)
+                "Code & Math", "Code & Math", "Code & Math",
+                
+                // Long QA benchmarks
+                "Long QA", "Long QA", "Long QA", "Long QA", "Long QA", "Long QA", "Long QA", "Long QA",
+                
+                // Summ benchmarks
+                "Summ", "Summ", "Summ", "Summ", "Summ",
+                
+                // Writing benchmarks
+                "Writing", "Writing", "Writing",
+                
+                // Cite benchmarks
+                "Cite",
+                
+                // ICL benchmarks
+                "ICL", "ICL"
+            ];
+
+            const values = [
+                // Root level - adjusted for new benchmarks
+                420, 430,
+                
+                // Synthetic Tasks children
+                52, 182, 65, 90, 31,
+                
+                // Real-World Tasks children
+                200, 100, 60, 25, 45,
+                
+                // S-Doc QA benchmarks (26 each)
+                26, 26,
+                
+                // M-Doc QA benchmarks (approximately 36 each)
+                36, 36, 36, 37, 37,
+                
+                // Choose benchmarks - now 3 including Ada-LEval
+                22, 22, 21,
+                
+                // Synthetic Recall benchmarks - now 4 including NoLiMa
+                23, 23, 22, 22,
+                
+                // Code & Math benchmarks - now 3 including BAMBOO-Code
+                10, 10, 11,
+                
+                // Long QA benchmarks - now 8 including new ones
+                25, 25, 25, 25, 25, 25, 25, 25,
+                
+                // Summ benchmarks (20 each)
+                20, 20, 20, 20, 20,
+                
+                // Writing benchmarks - now 3 including BAMBOO-Text
+                20, 20, 20,
+                
+                // Cite benchmarks
+                25,
+                
+                // ICL benchmarks
+                22, 23
+            ];
+
+            // Color scheme
             const colors = [];
-            
-            // Define base colors for main categories
             const baseColors = {
-                synthetic: "#ff6b9d",  // Pink for Synthetic Tasks
-                realworld: "#4ecdc4"   // Blue for Real-World Tasks
+                synthetic: "#ff6b9d",
+                realworld: "#4ecdc4"
             };
 
-            // Helper function to lighten/darken colors
             function adjustColor(color, amount) {
                 const num = parseInt(color.replace("#",""), 16);
                 const r = Math.min(255, Math.max(0, (num >> 16) + amount));
@@ -2071,12 +2358,11 @@
                 return "#" + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
             }
 
-            // Create color mapping based on hierarchy
             const colorMap = new Map();
             
-            for (let i = 0; i < labels_trimmed.length; i++) {
-                const label = labels_trimmed[i];
-                const parent = parents_trimmed[i];
+            for (let i = 0; i < labels.length; i++) {
+                const label = labels[i];
+                const parent = parents[i];
                 
                 if (parent === "") {
                     // Root level
@@ -2088,19 +2374,17 @@
                         colorMap.set(label, baseColors.realworld);
                     }
                 } else if (parent === "Synthetic Tasks" || parent === "Real-World Tasks") {
-                    // Second level - slightly lighter than parent
+                    // Second level
                     const parentColor = colorMap.get(parent);
                     const childColor = adjustColor(parentColor, 40);
                     colors.push(childColor);
                     colorMap.set(label, childColor);
                 } else {
-                    // Third level and beyond - progressively lighter
-                    const grandParentColor = colorMap.get(parent);
-                    if (grandParentColor) {
-                        const adjustment = 20 + (i % 3) * 15; // Vary slightly for visual distinction
-                        colors.push(adjustColor(grandParentColor, adjustment));
+                    // Third level and beyond
+                    const parentColor = colorMap.get(parent);
+                    if (parentColor) {
+                        colors.push(adjustColor(parentColor, 30));
                     } else {
-                        // Fallback color
                         colors.push("#dda0dd");
                     }
                 }
@@ -2109,19 +2393,19 @@
             const fig = {
                 data: [{
                     type: 'sunburst',
-                    labels: labels_trimmed,
-                    parents: parents_trimmed,
-                    values: values_trimmed,
+                    labels: labels,
+                    parents: parents,
+                    values: values,
                     branchvalues: "total",
                     maxdepth: 3,
                     marker: {
                         colors: colors,
                         line: {
                             color: '#ffffff',
-                            width: 3
+                            width: 2
                         }
                     },
-                    hovertemplate: '<b>%{label}</b><br>Tasks: %{value}<extra></extra>',
+                    hovertemplate: '<b>%{label}</b><br>Tasks: %{value}<br>Click for details<extra></extra>',
                     hoverlabel: {
                         bgcolor: "rgba(255, 107, 157, 0.9)",
                         bordercolor: "#ffffff",
@@ -2131,7 +2415,7 @@
                 layout: {
                     margin: { t: 10, l: 10, r: 10, b: 10 },
                     font: {
-                        size: 13,
+                        size: 12,
                         color: "#333333",
                         family: "Nunito, sans-serif"
                     },
@@ -2141,13 +2425,28 @@
                 }
             };
 
-            console.log('Initializing kawaii sunburst chart with', labels_trimmed.length, 'items');
+            console.log('Initializing enhanced sunburst chart with', labels.length, 'items');
             
             try {
                 Plotly.newPlot('sunburst-chart', fig, {responsive: true});
-                console.log('Kawaii sunburst chart created successfully');
+                
+                // Add click event handler
+                document.getElementById('sunburst-chart').on('plotly_click', function(data) {
+                    const point = data.points[0];
+                    const clickedLabel = point.label;
+                    
+                    // Check if clicked item is one of our new benchmarks
+                    const benchmark = benchmarkData[clickedLabel];
+                    if (benchmark) {
+                        showBenchmarkDetails(clickedLabel, benchmark.description, benchmark.githubUrl);
+                    }
+                });
+                
+                console.log('Enhanced sunburst chart created successfully');
             } catch (error) {
                 console.error('Error creating sunburst chart:', error);
+                document.getElementById('sunburst-chart').innerHTML = 
+                    '<div style="text-align: center; padding: 100px; color: #666;">Error loading chart: ' + error.message + '</div>';
             }
         }
 
@@ -2179,6 +2478,7 @@
             // After adding, observe them for animation
             setTimeout(observeElements, 100);
         }
+
         function updateBenchmarkButtons() {
             document.querySelectorAll('.benchmark-btn').forEach(btn => {
                 if (btn.dataset.ability === currentAbility) {
@@ -2223,81 +2523,90 @@
             });
         }
         const implementationData = {
-            "hf_models": [
+            "models": [
                 {
                     name: "HF_Models",
-                    description: "A collection of Hugging Face models optimized for long-context tasks, including Qwen3 and Llama series, with support for PEFT adapters."
-                }
-            ],
-            "server": [
+                    description: "A collection of Hugging Face models optimized for long-context tasks, including Qwen3 and Llama series, with support for PEFT adapters.",
+                    githubUrl: "https://github.com/huggingface/transformers"
+                },
                 {
                     name: "VLLM",
-                    description: "A high-performance inference engine for large language models, supporting long-context tasks with efficient memory management and acceleration techniques."
+                    description: "A high-performance inference engine for large language models, supporting long-context tasks with efficient memory management and acceleration techniques.",
+                    githubUrl: "https://github.com/vllm-project/vllm"
                 },
                 {
                     name: "SGLang", 
-                    description: "A server-side framework for deploying long-context models with advanced features like dynamic context management and real-time performance monitoring."
+                    description: "A server-side framework for deploying long-context models with advanced features like dynamic context management and real-time performance monitoring.",
+                    githubUrl: "https://github.com/sgl-project/sglang"
+                },
+                {
+                    name: "API", 
+                    description: "External API services for long-context model inference, including OpenAI API, Anthropic Claude API, and other third-party model serving platforms.",
+                    githubUrl: "https://github.com/openai/openai-python"
                 }
             ],
             "sparse_attention": [
                 {
                     name: "FlexPrefill",
-                    description: "An advanced prefill strategy that optimizes attention mechanisms for long-context models, enabling efficient processing of large inputs while maintaining high accuracy."
+                    description: "An advanced prefill strategy that optimizes attention mechanisms for long-context models, enabling efficient processing of large inputs while maintaining high accuracy.",
+                    githubUrl: "https://github.com/ByteDance-Seed/FlexPrefill"
                 },
                 {
                     name: "XAttention",
-                    description: "A sparse attention mechanism designed to enhance long-context model performance by selectively focusing on relevant tokens, reducing computational overhead."
+                    description: "A sparse attention mechanism designed to enhance long-context model performance by selectively focusing on relevant tokens, reducing computational overhead.",
+                    githubUrl: "https://github.com/mit-han-lab/x-attention"
                 }
             ],
             "token_eviction": [
                 {
                     name: "StreamingLLM",
-                    description: "A streaming inference framework that implements token eviction strategies to manage memory usage in long-context models, allowing for real-time processing of large inputs."
+                    description: "A streaming inference framework that implements token eviction strategies to manage memory usage in long-context models, allowing for real-time processing of large inputs.",
+                    githubUrl: "https://github.com/mit-han-lab/streaming-llm"
                 },
                 {
                     name: "H2O",
-                    description: "A high-performance token eviction system that dynamically manages context length in long-context models, optimizing memory usage and inference speed."
+                    description: "A high-performance token eviction system that dynamically manages context length in long-context models, optimizing memory usage and inference speed.",
+                    githubUrl: "https://github.com/FMInference/H2O"
                 },
                 {
                     name: "SnapKV",
-                    description: "A token eviction mechanism that efficiently manages long-context inputs by selectively removing less relevant tokens, enhancing model performance and reducing memory footprint."
+                    description: "A token eviction mechanism that efficiently manages long-context inputs by selectively removing less relevant tokens, enhancing model performance and reducing memory footprint.",
+                    githubUrl: "https://github.com/FasterDecoding/SnapKV"
                 },
                 {
                     name: "L2Compress",
-                    description: "A compression technique that reduces the memory footprint of long-context models by intelligently evicting less critical tokens, enabling efficient processing of large inputs."
-                }
-            ],
-            "layer_wise": [
+                    description: "A compression technique that reduces the memory footprint of long-context models by intelligently evicting less critical tokens, enabling efficient processing of large inputs.",
+                    githubUrl: "https://github.com/alessiodevoto/l2compress"
+                },
                 {
                     name: "PyramidKV",
-                    description: "A layer-wise attention mechanism that optimizes long-context processing by dynamically adjusting attention across different layers, improving model efficiency and performance."
+                    description: "A layer-wise attention mechanism that optimizes long-context processing by dynamically adjusting attention across different layers, improving model efficiency and performance.",
+                    githubUrl: "https://github.com/Zefan-Cai/KVCache-Factory"
                 },
                 {
                     name: "CakeKV",
-                    description: "A layer-wise attention strategy that enhances long-context model performance by distributing attention across multiple layers, allowing for better context understanding and memory management."
-                }
-            ],
-            "quantization": [
+                    description: "A layer-wise attention strategy that enhances long-context model performance by distributing attention across multiple layers, allowing for better context understanding and memory management.",
+                    githubUrl: "https://github.com/antgroup/cakekv"
+                },
                 {
                     name: "KIVI", 
-                    description: "A quantization framework that optimizes long-context models by reducing precision while maintaining performance, enabling efficient deployment on resource-constrained devices."
-                }
-            ],
-            "hybird": [
+                    description: "A quantization framework that optimizes long-context models by reducing precision while maintaining performance, enabling efficient deployment on resource-constrained devices.",
+                    githubUrl: "https://github.com/jy-yuan/KIVI"
+                },
                 {
                     name: "ThinK", 
-                    description: "A hybrid approach combining token eviction and quantization attention to optimize long-context model performance, balancing memory usage and computational efficiency."
-                }
-            ],
-            "token_merge": [
+                    description: "A hybrid approach combining token eviction and quantization attention to optimize long-context model performance, balancing memory usage and computational efficiency.",
+                    githubUrl: "https://github.com/SalesforceAIResearch/ThinK"
+                },
                 {
                     name: "CaM", 
-                    description: "A token merging technique that reduces the number of tokens in long-context models by intelligently combining similar tokens, enhancing processing efficiency and memory usage."
+                    description: "A token merging technique that reduces the number of tokens in long-context models by intelligently combining similar tokens, enhancing processing efficiency and memory usage.",
+                    githubUrl: "https://github.com/zyxxmu/cam"
                 }
             ]
         };
 
-        let currentImplementation = "hf_models";
+        let currentImplementation = "models";
 
         function renderImplementationCards() {
             const container = document.getElementById('implementation-grid');
@@ -2310,8 +2619,13 @@
                 card.className = 'implementation-card clean-card animate-on-scroll';
                 card.style.animationDelay = `${index * 0.1}s`;
                 
+                // 如果有 GitHub 链接，则创建可点击的名称，否则显示普通名称
+                const implementationNameElement = implementation.githubUrl 
+                    ? `<a href="${implementation.githubUrl}" target="_blank" rel="noopener noreferrer" class="implementation-name implementation-link">${implementation.name}</a>`
+                    : `<div class="implementation-name">${implementation.name}</div>`;
+                
                 card.innerHTML = `
-                    <div class="implementation-name">${implementation.name}</div>
+                    ${implementationNameElement}
                     <div class="implementation-description">${implementation.description}</div>
                 `;
                 
@@ -2368,19 +2682,28 @@
             });
         }
 
-        // Model Performance Data
-        const modelData = {
+       // Model Performance Data
+       const modelData = {
             scores: {
-                "Qwen3-30B-A3B": [37.96,40.61,11.61,78.32,43.24,60.31,48.96,41.30,22.82,28.42,100.00,24.12,14.14,83.24,56.09],
-                "Qwen3-14B": [35.64,43.84,11.79,74.94,45.47,59.15,56.41,31.95,21.26,29.85,100.00,27.35,10.24,85.75,55.87],
-                "Meta-Llama-3.1-8B-Instruct": [25.79,39.70,11.81,86.79,37.94,57.42,37.68,25.40,25.66,30.40,91.00,20.06,33.64,45.96,51.24],
-                "Qwen3-8B": [33.18,41.15,11.67,67.68,38.62,55.28,52.32,32.61,15.15,27.25,64.00,21.92,8.06,81.99,51.78],
-                "Qwen3-4B": [24.55,39.03,11.69,70.29,39.32,55.01,42.06,33.66,18.24,32.52,62.00,17.95,13.05,74.25,46.92]
+                "Qwen3-14B": [35.64, 43.84, 74.94, 45.47, 59.15, 56.41, 21.26, 29.85, 100, 10.24, 85.75, 55.87],
+                "Qwen3-30B-A3B": [37.96, 40.61, 78.32, 43.24, 60.31, 48.96, 22.82, 28.42, 100, 14.14, 83.24, 56.09],
+                "Meta-Llama-3.1-8B-Instruct": [25.79, 39.7, 86.79, 37.94, 57.42, 37.68, 25.66, 30.4, 91, 33.64, 45.96, 51.24],
+                "c4ai-command-r7b-12-2024": [24.73, 42.68, 77.41, 37.16, 47.44, 35, 35.66, 33.33, 92.43, 20.09, 51.69, 47],
+                "glm-4-9b-chat": [30.66, 46.42, 85.25, 45.24, 55, 36.84, 23.33, 32, 65.27, 20.35, 43.9, 54.42],
+                "Qwen3-8B": [33.18, 41.15, 67.68, 38.62, 55.28, 52.32, 15.15, 27.25, 64, 8.06, 81.99, 51.78],
+                "Phi-3-mini-128k-instruct": [32.96, 39.87, 78.62, 38.31, 53.56, 31.04, 39.87, 24.02, 90, 35.14, 33.73, 38.86],
+                "Phi-4-mini-instruct": [24.2, 40.18, 76.7, 42.69, 53.56, 13.31, 30.93, 31.33, 92.61, 27.87, 41.27, 51.28],
+                "Qwen3-4B": [24.55, 39.03, 70.29, 39.32, 55.01, 42.06, 18.24, 32.52, 62, 13.05, 74.25, 46.92],
+                "Qwen2.5-7B-Instruct": [29.12, 44.63, 72.02, 40.85, 55.89, 38.25, 14.94, 27.33, 64.18, 13.97, 52.75, 50.23],
+                "Mistral-Nemo-Instruct-2407": [24.91, 42.47, 60.6, 39.75, 53.67, 21.12, 21.61, 21.34, 60.41, 16.98, 48.3, 49.25],
+                "GLM-4-9B": [21.59, 45.7, 55.96, 38.41, 46.33, 21.51, 17.18, 24, 47.15, 3.11, 74.89, 45.76],
+                "Llama-3.1-Nemotron-Nano-8B-v1": [14.11, 34.32, 42.51, 27.19, 28.78, 11.72, 6.57, 12.67, 43.73, 0.47, 38.99, 32.54],
+                "Llama-3.1-Nemotron-Nano-4B-v1.1": [10.11, 25.88, 38.85, 19.94, 22.67, 7.48, 6.69, 22.67, 28.38, 7.43, 45.68, 16.81]
             },
             sequence: [
-                "L_CiteEval", "LEval", "LooGLE", "RULER", "longbench", 
-                "babilong", "Counting_Stars", "LongIns", "LVEval", 
-                "longbench_v2", "NIAH", "NThread", "InfiniteBench", "LongWriter", "LIBRA"
+                "L_CiteEval", "LEval", "RULER", "longbench", 
+                "babilong", "Counting_Stars", "LVEval", 
+                "longbench_v2", "NIAH", "InfiniteBench", "LongWriter", "LIBRA"
             ],
             capabilities: {
                 "overview": {
@@ -2399,18 +2722,18 @@
                 },
 
                 "general": {
-                    "tests": ["LEval", "LooGLE", "RULER", "longbench"],
+                    "tests": ["LEval", "RULER", "longbench"],
                     "description": "Comprehensive assessment of common NLP tasks including text understanding, classification, and information extraction.",
                     "columns": [
                         { name: "Rank", type: "fixed", sortable: true },
                         { name: "Model", type: "fixed", sortable: false },
                         { name: "Avg Score", type: "fixed", sortable: true },
                         { name: "LEval", type: "test", sortable: true },
-                        { name: "LooGLE", type: "test", sortable: true },
                         { name: "RULER", type: "test", sortable: true },
                         { name: "longbench", type: "test", sortable: true }
                     ]
                 },
+
                 "faithfulness": {
                     "tests": ["L_CiteEval"],
                     "description": "Evaluates model consistency with source information, measuring accuracy in citation and avoiding hallucinations.",
@@ -2422,27 +2745,25 @@
                     ]
                 },
                 "reasoning": {
-                    "tests": ["Counting_Stars", "LongIns", "LVEval", "longbench_v2","babilong"],
+                    "tests": ["Counting_Stars", "LVEval", "longbench_v2","babilong"],
                     "description": "Advanced logical reasoning, mathematical computation, causal inference, and complex multi-step problem solving.",
                     "columns": [
                         { name: "Rank", type: "fixed", sortable: true },
                         { name: "Model", type: "fixed", sortable: false },
                         { name: "Avg Score", type: "fixed", sortable: true },
                         { name: "Counting-Stars", type: "test", sortable: true },
-                        { name: "LongIns", type: "test", sortable: true },
                         { name: "LVEval", type: "test", sortable: true },
                         { name: "longbench_v2", type: "test", sortable: true },
                         { name: "babilong", type: "test", sortable: true }
                     ]
                 },
                 "retrieval": {
-                    "tests": ["NThread", "InfiniteBench","NIAH"],
+                    "tests": [ "InfiniteBench","NIAH"],
                     "description": "Information localization and extraction from extensive contexts, testing long-document processing capabilities.",
                     "columns": [
                         { name: "Rank", type: "fixed", sortable: true },
                         { name: "Model", type: "fixed", sortable: false },
                         { name: "Avg Score", type: "fixed", sortable: true },
-                        { name: "NThread", type: "test", sortable: true },
                         { name: "InfiniteBench", type: "test", sortable: true },
                         { name: "NIAH", type: "test", sortable: true },
                     ]
@@ -2470,64 +2791,59 @@
             }
         };
 
-        // Leaderboard State
-        let currentCapability = "overview";
-        let sortColumn = "Avg Score";
-        let sortDirection = "desc";
-        let models = [];
+        // 改进的模型分类函数
+        function getModelClass(modelName) {
+            if (modelName.includes("Qwen")) return "Qwen";
+            if (modelName.includes("Llama") || modelName.includes("Meta-Llama")) return "Llama";
+            return "Other";  // 其他所有模型都归为Other类
+        }
 
-        // Model Comparison Chart - Kawaii color palette
-        const modelCapabilities = {
-            "Qwen3-30B-A3B": {
-                "Faithfulness": 37.96,
-                "General": 43.45,
-                "Reasoning": 40.36,
-                "Retrieval": 46.09,
-                "Generation": 83.24,
-                "Specialization": 56.09
-            },
-            "Qwen3-14B": {
-                "Faithfulness": 35.64,
-                "General": 44.01,
-                "Reasoning": 39.72,
-                "Retrieval": 45.86,
-                "Generation": 85.75,
-                "Specialization": 55.87
-            },
-            "Meta-Llama-3.1-8B-Instruct": {
-                "Faithfulness": 25.79,
-                "General": 44.06,
-                "Reasoning": 35.31,
-                "Retrieval": 48.23,
-                "Generation": 45.96,
-                "Specialization": 51.24
-            },
-            "Qwen3-8B": {
-                "Faithfulness": 33.18,
-                "General": 39.78,
-                "Reasoning": 36.52,
-                "Retrieval": 31.33,
-                "Generation": 81.99,
-                "Specialization": 51.78
-            },
-            "Qwen3-4B": {
-                "Faithfulness": 24.55,
-                "General": 40.08,
-                "Reasoning": 36.30,
-                "Retrieval": 31.00,
-                "Generation": 74.25,
-                "Specialization": 46.92
-            }
-        };
-
-        // Kawaii gradient colors
+        // 更新颜色定义，确保与所有模型匹配
         const modelColors = {
             "Qwen3-30B-A3B": "#ff6b9d",
             "Qwen3-14B": "#c44ace", 
             "Meta-Llama-3.1-8B-Instruct": "#4ecdc4",
             "Qwen3-8B": "#fce38a",
-            "Qwen3-4B": "#95e1d3"
+            "Qwen3-4B": "#95e1d3",
+            "c4ai-command-r7b-12-2024": "#a8e6cf",
+            "glm-4-9b-chat": "#ffd3b6",
+            "Phi-3-mini-128k-instruct": "#ffaaa5",
+            "Phi-4-mini-instruct": "#ff8b94",
+            "Qwen2.5-7B-Instruct": "#c7ceea",
+            "Mistral-Nemo-Instruct-2407": "#b2e1d4",
+            "GLM-4-9B": "#fee77f",
+            "Llama-3.1-Nemotron-Nano-8B-v1": "#f4c2c2",
+            "Llama-3.1-Nemotron-Nano-4B-v1.1": "#d4a5a5"
         };
+
+        // 动态生成完整的模型能力数据
+        function generateModelCapabilities() {
+            const capabilities = {};
+            
+            Object.keys(modelData.scores).forEach(model => {
+                const modelScores = modelData.scores[model];
+                
+                capabilities[model] = {
+                    "Faithfulness": calculateAbilityAverage(modelScores, modelData.capabilities.faithfulness.tests),
+                    "General": calculateAbilityAverage(modelScores, modelData.capabilities.general.tests),
+                    "Reasoning": calculateAbilityAverage(modelScores, modelData.capabilities.reasoning.tests),
+                    "Retrieval": calculateAbilityAverage(modelScores, modelData.capabilities.retrieval.tests),
+                    "Generation": calculateAbilityAverage(modelScores, modelData.capabilities.generation.tests),
+                    "Specialization": calculateAbilityAverage(modelScores, modelData.capabilities.specialization.tests)
+                };
+            });
+            
+            return capabilities;
+        }
+
+        // 完整的模型能力数据
+        const modelCapabilities = generateModelCapabilities();
+
+        // Leaderboard State
+        let currentCapability = "overview";
+        let sortColumn = "Avg Score";
+        let sortDirection = "desc";
+        let models = [];
 
         let radarChart = null;
 
@@ -2655,8 +2971,7 @@
             });
             
             sortedModels.forEach((model, index) => {
-                const isQwen = model.name.includes("Qwen");
-                const modelClass = isQwen ? "Qwen" : "Llama";
+                const modelClass = getModelClass(model.name);
                 
                 const row = document.createElement("tr");
                 
@@ -2724,22 +3039,37 @@
         function createModelSelector() {
             const container = document.getElementById('modelCheckboxes');
             
-            Object.keys(modelCapabilities).forEach(model => {
+            // 使用完整的模型数据
+            Object.keys(modelData.scores).forEach(model => {
                 const wrapper = document.createElement('div');
                 wrapper.className = 'model-checkbox-wrapper active';
                 
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
-                checkbox.id = `model-${model.replace(/\s+/g, '-')}`;
+                checkbox.id = `model-${model.replace(/\s+/g, '-').replace(/\./g, '_')}`;
                 checkbox.value = model;
                 checkbox.checked = true;
                 
-                // Shorten model names for display
+                // 缩短模型名称显示
                 let displayName = model;
                 if (model.includes('Qwen3-')) {
                     displayName = model.replace('Qwen3-', 'Qwen3 ');
                 } else if (model.includes('Meta-Llama-3.1-8B-Instruct')) {
                     displayName = 'Llama3.1-8B';
+                } else if (model.includes('c4ai-command-r7b-12-2024')) {
+                    displayName = 'Command-R7B';
+                } else if (model.includes('Phi-3-mini-128k-instruct')) {
+                    displayName = 'Phi-3-mini';
+                } else if (model.includes('Phi-4-mini-instruct')) {
+                    displayName = 'Phi-4-mini';
+                } else if (model.includes('Qwen2.5-7B-Instruct')) {
+                    displayName = 'Qwen2.5-7B';
+                } else if (model.includes('Mistral-Nemo-Instruct-2407')) {
+                    displayName = 'Mistral-Nemo';
+                } else if (model.includes('Llama-3.1-Nemotron-Nano-8B-v1')) {
+                    displayName = 'Nemotron-8B';
+                } else if (model.includes('Llama-3.1-Nemotron-Nano-4B-v1.1')) {
+                    displayName = 'Nemotron-4B';
                 }
                 
                 const label = document.createElement('label');
@@ -2753,28 +3083,21 @@
                 wrapper.appendChild(label);
                 container.appendChild(wrapper);
                 
-                // Add click event to the entire wrapper with better event handling
                 wrapper.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
                     
-                    // Toggle checkbox state
                     checkbox.checked = !checkbox.checked;
                     
-                    // Update wrapper visual state
                     if (checkbox.checked) {
                         wrapper.classList.add('active');
                     } else {
                         wrapper.classList.remove('active');
                     }
                     
-                    console.log(`Clicked ${model}: ${checkbox.checked ? 'checked' : 'unchecked'}`);
-                    
-                    // Update radar chart
                     updateRadarChart();
                 });
                 
-                // Prevent double-click events
                 wrapper.addEventListener('dblclick', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
@@ -2782,12 +3105,134 @@
             });
         }
 
-        function initRadarChart() {
-            const ctx = document.getElementById('modelComparisonChart').getContext('2d');
-            const labels = Object.keys(modelCapabilities["Qwen3-30B-A3B"]);
-            const selectedModels = Object.keys(modelCapabilities);
+        function updateRadarChart() {
+            if (!radarChart) return;
+            
+            const selectedModels = [];
+            const checkboxes = document.querySelectorAll('#modelCheckboxes input[type="checkbox"]');
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedModels.push(checkbox.value);
+                }
+            });
+            
+            const labels = Object.keys(modelCapabilities[Object.keys(modelCapabilities)[0]]);
             const datasets = selectedModels.map(model => {
                 const data = labels.map(label => modelCapabilities[model][label]);
+                
+                return {
+                    label: model,
+                    data: data,
+                    backgroundColor: 'transparent',
+                    borderColor: modelColors[model],
+                    pointBackgroundColor: modelColors[model],
+                    pointBorderColor: '#ffffff',
+                    pointHoverBackgroundColor: '#ffffff',
+                    pointHoverBorderColor: modelColors[model],
+                    pointRadius: 8,
+                    pointHoverRadius: 12,
+                    borderWidth: 4,
+                    pointBorderWidth: 3
+                };
+            });
+            
+            radarChart.data.datasets = datasets;
+            radarChart.update();
+        }
+
+        
+
+        // Event Listeners
+        document.addEventListener("DOMContentLoaded", function() {
+            initSunburstChart();
+            models = prepareModelData();
+            renderTable();
+            createModelSelector();
+            initRadarChart();
+
+            document.querySelectorAll(".capability-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    currentCapability = btn.dataset.capability;
+                    sortColumn = "Avg Score";
+                    sortDirection = "desc";
+                    renderTable();
+                });
+            });
+        });
+        // 为每个维度定义不同的最大值
+        const dimensionMaxValues = {
+            "Faithfulness": 42,
+            "General": 75, 
+            "Reasoning": 50,
+            "Retrieval": 80,
+            "Generation": 100,
+            "Specialization": 65
+        };
+
+        // 数据归一化函数 - 将实际值转换为0-100的显示范围
+        function normalizeDataForDisplay(value, dimension) {
+            const maxValue = dimensionMaxValues[dimension] || 100;
+            // 将实际值按比例映射到0-100范围
+            return (value / maxValue) * 100;
+        }
+
+        // 反向归一化函数 - 用于工具提示显示实际值
+        function denormalizeDataForTooltip(normalizedValue, dimension) {
+            const maxValue = dimensionMaxValues[dimension] || 100;
+            return (normalizedValue / 100) * maxValue;
+        }
+        function updateRadarChart() {
+            if (!radarChart) return;
+            
+            const selectedModels = [];
+            const checkboxes = document.querySelectorAll('#modelCheckboxes input[type="checkbox"]');
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedModels.push(checkbox.value);
+                }
+            });
+            
+            const labels = Object.keys(modelCapabilities[Object.keys(modelCapabilities)[0]]);
+            const datasets = selectedModels.map(model => {
+                // 对数据进行归一化处理
+                const data = labels.map(label => {
+                    const originalValue = modelCapabilities[model][label];
+                    return normalizeDataForDisplay(originalValue, label);
+                });
+                
+                return {
+                    label: model,
+                    data: data,
+                    backgroundColor: 'transparent',
+                    borderColor: modelColors[model],
+                    pointBackgroundColor: modelColors[model],
+                    pointBorderColor: '#ffffff',
+                    pointHoverBackgroundColor: '#ffffff',
+                    pointHoverBorderColor: modelColors[model],
+                    pointRadius: 8,
+                    pointHoverRadius: 12,
+                    borderWidth: 4,
+                    pointBorderWidth: 3
+                };
+            });
+            
+            radarChart.data.datasets = datasets;
+            radarChart.update();
+        }
+
+        function initRadarChart() {
+            const ctx = document.getElementById('modelComparisonChart').getContext('2d');
+            const labels = Object.keys(modelCapabilities[Object.keys(modelCapabilities)[0]]);
+            const selectedModels = Object.keys(modelCapabilities);
+            
+            const datasets = selectedModels.map(model => {
+                // 对初始数据进行归一化处理
+                const data = labels.map(label => {
+                    const originalValue = modelCapabilities[model][label];
+                    return normalizeDataForDisplay(originalValue, label);
+                });
                 
                 return {
                     label: model,
@@ -2820,7 +3265,7 @@
                     scales: {
                         r: {
                             min: 0,
-                            max: 100,
+                            max: 100, // 显示范围保持0-100
                             beginAtZero: true,
                             ticks: {
                                 stepSize: 20,
@@ -2830,6 +3275,11 @@
                                     size: 12,
                                     weight: '500',
                                     family: 'Nunito'
+                                },
+                                // 自定义刻度标签，显示每个维度的实际最大值比例
+                                callback: function(value, index, values) {
+                                    // 这里显示归一化后的值
+                                    return value;
                                 }
                             },
                             grid: {
@@ -2846,7 +3296,12 @@
                                     weight: '600',
                                     family: 'Comfortaa'
                                 },
-                                color: '#c44ace'
+                                color: '#c44ace',
+                                // 在标签中显示每个维度的最大值
+                                callback: function(label, index) {
+                                    const maxValue = dimensionMaxValues[label] || 100;
+                                    return `${label}`;
+                                }
                             }
                         }
                     },
@@ -2907,7 +3362,12 @@
                                     return tooltipItems[0].dataset.label;
                                 },
                                 label: function(context) {
-                                    return `${context.label}: ${context.raw.toFixed(1)}`;
+                                    const dimension = context.label;
+                                    const normalizedValue = context.raw;
+                                    const actualValue = denormalizeDataForTooltip(normalizedValue, dimension);
+                                    const maxValue = dimensionMaxValues[dimension] || 100;
+                                    
+                                    return `${dimension}: ${actualValue.toFixed(1)}/${maxValue} (${normalizedValue.toFixed(1)}%)`;
                                 }
                             }
                         }
@@ -2924,47 +3384,6 @@
                 }
             });
         }
-
-        function updateRadarChart() {
-            console.log('Updating radar chart...');
-            const selectedModels = [];
-            
-            // Get all checkboxes and check their state
-            document.querySelectorAll('.model-checkboxes input').forEach(checkbox => {
-                console.log(`Checkbox ${checkbox.value}: ${checkbox.checked}`);
-                if (checkbox.checked) {
-                    selectedModels.push(checkbox.value);
-                }
-            });
-            
-            console.log('Selected models:', selectedModels);
-            
-            // Update wrapper active state to match checkbox state
-            document.querySelectorAll('.model-checkbox-wrapper').forEach(wrapper => {
-                const checkbox = wrapper.querySelector('input');
-                if (checkbox.checked) {
-                    wrapper.classList.add('active');
-                } else {
-                    wrapper.classList.remove('active');
-                }
-            });
-            
-            if (radarChart && radarChart.data && radarChart.data.datasets) {
-                // Update dataset visibility
-                radarChart.data.datasets.forEach((dataset, index) => {
-                    const meta = radarChart.getDatasetMeta(index);
-                    const isVisible = selectedModels.includes(dataset.label);
-                    meta.hidden = !isVisible;
-                    console.log(`Dataset ${dataset.label}: visible = ${isVisible}`);
-                });
-                
-                radarChart.update('none'); // Use 'none' for immediate update without animation
-                console.log('Chart updated successfully');
-            } else {
-                console.log('Radar chart not properly initialized');
-            }
-        }
-
         // Copy BibTeX Function
         function copyBibTeX() {
             const bibtex = document.getElementById('bibtex').textContent;
@@ -3008,29 +3427,6 @@
                 observer.observe(el);
             });
         }
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            initFrameworkEventListeners();
-            renderBenchmarkCards();
-            renderImplementationCards();
-            
-            // Initialize leaderboard
-            models = prepareModelData();
-            models.sort((a, b) => b.avgScore - a.avgScore);
-            initEventListeners();
-            renderTable();
-            
-            // Initialize model comparison chart
-            createModelSelector();
-            initRadarChart();
-            
-            // Initialize sunburst chart
-            initSunburstChart();
-            
-            // Observe elements for scroll animations
-            observeElements();
-        });
-        // 在现有JavaScript代码末尾添加以下代码
 
         // 平滑滚动到section中央的函数
         function scrollToCenter(targetSelector) {
@@ -3066,6 +3462,7 @@
                     scrollToCenter('.introduction.content-section.mt-20');
                 });
             });
+            
             if (window.location.hash === '#demo-video') {
                 setTimeout(() => {
                     scrollToCenter('.introduction.content-section.mt-20');
@@ -3075,6 +3472,7 @@
             renderBenchmarkCards();
             renderImplementationCards();  
         });
+    
     </script>
 </body>
 </html>
