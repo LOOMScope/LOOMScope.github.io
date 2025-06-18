@@ -3449,14 +3449,13 @@
             });
         }
 
-        // 重写点击事件处理
+  
         document.addEventListener('DOMContentLoaded', function() {
-            // 找到所有指向#demo-video的链接
             const demoVideoLinks = document.querySelectorAll('a[href="#demo-video"]');
             
             demoVideoLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
-                    e.preventDefault(); // 阻止默认的锚点跳转
+                    e.preventDefault(); 
                     
                     scrollToCenter('.introduction.content-section.mt-20');
                 });
