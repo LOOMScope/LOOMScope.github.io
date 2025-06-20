@@ -1049,6 +1049,29 @@
             color: var(--secondary-blue);
             border: 1px solid #BBDEFB;
         }
+        .model-label.Phi {
+            background: #FFF3E0;
+            color: #FF8C00;
+            border: 1px solid #FFCC80;
+        }
+
+        .model-label.GLM {
+            background: #F3E5F5;
+            color: #8E24AA;
+            border: 1px solid #CE93D8;
+        }
+
+        .model-label.Command {
+            background: #E8F5E8;
+            color: #2E7D32;
+            border: 1px solid #A5D6A7;
+        }
+
+        .model-label.Mistral {
+            background: #FFF8E1;
+            color: #F57F17;
+            border: 1px solid #FFF176;
+        }
         .model-label.Other {
             background: #95e1d3;
             color: #333;
@@ -1103,7 +1126,21 @@
         .legend-color.Llama {
             background: #87CEEB;
         }
+        .legend-color.Phi {
+            background: #FF8C00;
+        }
 
+        .legend-color.GLM {
+            background: #8E24AA;
+        }
+
+        .legend-color.Command {
+            background: #2E7D32;
+        }
+
+        .legend-color.Mistral {
+            background: #F57F17;
+        }
         .legend-color.Other {
             background: #006400;
         }
@@ -1866,9 +1903,22 @@
                     <span>Llama Model Series</span>                 
                 </div>
                 <div class="legend-item">                     
-                    <div class="legend-color Other"></div>                     
-                    <span>Other Model Series</span>                 
-                </div>             
+                    <div class="legend-color Phi"></div>                     
+                    <span>Phi Model Series</span>                 
+                </div>
+                <div class="legend-item">                     
+                    <div class="legend-color GLM"></div>                     
+                    <span>GLM Model Series</span>                 
+                </div>
+                <div class="legend-item">                     
+                    <div class="legend-color Command"></div>                     
+                    <span>Command Model Series</span>                 
+                </div>
+                <div class="legend-item">                     
+                    <div class="legend-color Mistral"></div>                     
+                    <span>Mistral Model Series</span>                 
+                </div>       
+            </div>           
             </div>
         </section>
 
@@ -2132,6 +2182,11 @@
                     name: "L-CiteEval",
                     description: "Evaluates citation quality across 11 tasks (8K-48K contexts), measuring both answer correctness and citation support accuracy.",
                     githubUrl: "https://github.com/LCM-Lab/L-CITEEVAL"
+                },
+                {
+                    name: "LongCite",
+                    description: "A framework enabling LLMs to generate accurate responses with fine-grained sentence-level citations in long-context QA (up to 128K tokens).",
+                    githubUrl: "https://github.com/THUDM/LongCite/tree/main"
                 }
             ],
             "Reasoning": [
@@ -2795,7 +2850,11 @@
         function getModelClass(modelName) {
             if (modelName.includes("Qwen")) return "Qwen";
             if (modelName.includes("Llama") || modelName.includes("Meta-Llama")) return "Llama";
-            return "Other";  // 其他所有模型都归为Other类
+            if (modelName.includes("Phi")) return "Phi";
+            if (modelName.includes("glm") || modelName.includes("GLM")) return "GLM";
+            if (modelName.includes("c4ai-command") || modelName.includes("command")) return "Command";
+            if (modelName.includes("Mistral")) return "Mistral";
+            return "Other";
         }
 
         // 更新颜色定义，确保与所有模型匹配
@@ -3040,15 +3099,16 @@
             const container = document.getElementById('modelCheckboxes');
             
             // 使用完整的模型数据
-            Object.keys(modelData.scores).forEach(model => {
+            Object.keys(modelData.scores).forEach((model, index) => {  // 添加index参数
                 const wrapper = document.createElement('div');
-                wrapper.className = 'model-checkbox-wrapper active';
+                const isSelected = index < 4;  // 只选中前4个
+                wrapper.className = isSelected ? 'model-checkbox-wrapper active' : 'model-checkbox-wrapper';
                 
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
                 checkbox.id = `model-${model.replace(/\s+/g, '-').replace(/\./g, '_')}`;
                 checkbox.value = model;
-                checkbox.checked = true;
+                checkbox.checked = isSelected;  // 根据isSelected决定是否选中
                 
                 // 缩短模型名称显示
                 let displayName = model;
@@ -3225,7 +3285,13 @@
         function initRadarChart() {
             const ctx = document.getElementById('modelComparisonChart').getContext('2d');
             const labels = Object.keys(modelCapabilities[Object.keys(modelCapabilities)[0]]);
-            const selectedModels = Object.keys(modelCapabilities);
+            
+            // 获取选中的模型（只有前4个）
+            const selectedModels = [];
+            const checkboxes = document.querySelectorAll('#modelCheckboxes input[type="checkbox"]:checked');
+            checkboxes.forEach(checkbox => {
+                selectedModels.push(checkbox.value);
+            });
             
             const datasets = selectedModels.map(model => {
                 // 对初始数据进行归一化处理
