@@ -1050,9 +1050,9 @@
             border: 1px solid #BBDEFB;
         }
         .model-label.Phi {
-            background: #FFF3E0;
-            color: #FF8C00;
-            border: 1px solid #FFCC80;
+            background: #FEE2E2;  /* 如果用红色的话 */
+            color: #DC2626;
+            border: 1px solid #FECACA;
         }
 
         .model-label.GLM {
@@ -1127,9 +1127,11 @@
             background: #87CEEB;
         }
         .legend-color.Phi {
-            background: #FF8C00;
+            background: #DC2626;;
         }
-
+        .legend-color.Mistral {
+            background: #F57F17;
+        }
         .legend-color.GLM {
             background: #8E24AA;
         }
@@ -1138,9 +1140,7 @@
             background: #2E7D32;
         }
 
-        .legend-color.Mistral {
-            background: #F57F17;
-        }
+
         .legend-color.Other {
             background: #006400;
         }
@@ -1982,7 +1982,7 @@
                         </tr>
                         <tr>
                             <td>LongIns</td>
-                            <td><span class="model-label Qwen">ChatGLM2-6B</span></td>
+                            <td><span class="model-label GLM">ChatGLM2-6B</span></td>
                             <td><strong style="color: var(--primary-green);">11.5</strong></td>
                             <td>12.0</td>
                             <td style="color: #E74C3C;">-0.5</td>
@@ -1996,7 +1996,7 @@
                         </tr>
                         <tr>
                             <td>Ada-LEval</td>
-                            <td><span class="model-label Qwen">ChatGLM3-6B-32k</span></td>
+                            <td><span class="model-label GLM">ChatGLM3-6B-32k</span></td>
                             <td><strong style="color: var(--primary-green);">6.9</strong></td>
                             <td>6.8</td>
                             <td style="color: #E74C3C;">0.1</td>
@@ -2012,14 +2012,14 @@
                         </tr>
                         <tr>
                             <td>LongBench</td>
-                            <td><span class="model-label Qwen">ChatGLM2-6B</span></td>
+                            <td><span class="model-label GLM">ChatGLM2-6B</span></td>
                             <td><strong style="color: var(--primary-green);">24.9</strong></td>
                             <td>25.7</td>
                             <td style="color: #E74C3C;">-0.8</td>
                         </tr>
                         <tr>
                             <td>LooGLE</td>
-                            <td><span class="model-label Qwen">ChatGLM2-6b-32k</span></td>
+                            <td><span class="model-label GLM">ChatGLM2-6b-32k</span></td>
                             <td><strong style="color: var(--primary-green);">19.6</strong></td>
                             <td>15.1</td>
                             <td style="color: var(--secondary-green);">+4.5</td>
@@ -2033,7 +2033,7 @@
                         </tr>
                         <tr>
                             <td>RULER</td>
-                            <td><span class="model-label Qwen">ChatGLM2-32k</span></td>
+                            <td><span class="model-label GLM">ChatGLM2-32k</span></td>
                             <td><strong style="color: var(--primary-green);">21.6</strong></td>
                             <td>19.3</td>
                             <td style="color: var(--secondary-green);">+2.3</td>
@@ -2041,7 +2041,7 @@
                         <tr>
                             <td rowspan="4">Retrieval</td>
                             <td>InfiniteBench</td>
-                            <td><span class="model-label Qwen">ChatGLM3-6b-128k</span></td>
+                            <td><span class="model-label GLM">ChatGLM3-6b-128k</span></td>
                             <td><strong style="color: var(--primary-green);">24.5</strong></td>
                             <td>19.5</td>
                             <td style="color: var(--secondary-green);">+5.0</td>
@@ -2085,14 +2085,14 @@
                         </tr>
                         <tr>
                             <td>LongHealth</td>
-                            <td><span class="model-label Qwen">longchat-7b-v1.5-32k</span></td>
+                            <td><span class="model-label Other">longchat-7b-v1.5-32k</span></td>
                             <td><strong style="color: var(--primary-green);">11.8</strong></td>
                             <td>9.6</td>
                             <td style="color: #E74C3C;">+2.6</td>
                         </tr>
                         <tr>
                             <td>CLongEval</td>
-                            <td><span class="model-label Qwen">chatglm3-6b</span></td>
+                            <td><span class="model-label GLM">chatglm3-6b</span></td>
                             <td><strong style="color: var(--primary-green);">25.2</strong></td>
                             <td>25.0</td>
                             <td style="color: #E74C3C;">+0.2</td>
@@ -2116,7 +2116,6 @@
                 </table>
 
         </section>
-
         <!-- Citation Section -->
         <section class="citation content-section">
             <div class="section-header animate-on-scroll">
