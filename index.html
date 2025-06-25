@@ -3504,7 +3504,6 @@
             const elementHeight = elementRect.height;
             const windowHeight = window.innerHeight;
             
-            // 计算要滚动到的位置（让元素中心位于视窗中心）
             const targetScrollTop = elementTop + (elementHeight / 2) - (windowHeight / 2);
             
             // 平滑滚动
@@ -3513,11 +3512,8 @@
                 behavior: 'smooth'
             });
         }
-
-  
         document.addEventListener('DOMContentLoaded', function() {
             const demoVideoLinks = document.querySelectorAll('a[href="#demo-video"]');
-            
             demoVideoLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault(); 
