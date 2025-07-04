@@ -3578,6 +3578,7 @@
                 }
             });
         }
+        // Copy BibTeX Function
         function copyBibTeX() {
             const bibtex = document.getElementById('bibtex').textContent;
             navigator.clipboard.writeText(bibtex).then(() => {
@@ -3591,6 +3592,8 @@
                 }, 2000);
             });
         }
+
+        // Initialize Everything
         function initEventListeners() {
             document.querySelectorAll(".capability-btn").forEach(btn => {
                 btn.addEventListener("click", (e) => {
@@ -3601,6 +3604,8 @@
                 });
             });
         }
+        
+        // Scroll animation observer
         function observeElements() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -3611,19 +3616,26 @@
             }, {
                 threshold: 0.1
             });
+            
             document.querySelectorAll('.animate-on-scroll').forEach(el => {
                 observer.observe(el);
             });
         }
+
+        // 平滑滚动到section中央的函数
         function scrollToCenter(targetSelector) {
             const targetElement = document.querySelector(targetSelector);
             if (!targetElement) return;
+            
+            // 获取目标元素的位置信息
             const elementRect = targetElement.getBoundingClientRect();
             const elementTop = elementRect.top + window.pageYOffset;
             const elementHeight = elementRect.height;
             const windowHeight = window.innerHeight;
             
             const targetScrollTop = elementTop + (elementHeight / 2) - (windowHeight / 2);
+            
+            // 平滑滚动
             window.scrollTo({
                 top: Math.max(0, targetScrollTop), // 确保不会滚动到负数位置
                 behavior: 'smooth'
@@ -3646,7 +3658,7 @@
             renderBenchmarkCards();
             renderImplementationCards();  
         });
-        let scrollDistance = 1000; // 修改此值
+        let scrollDistance = 1000;
         document.addEventListener('keydown', function(e) {
             if (e.code === 'Space') {
                 e.preventDefault();
