@@ -1883,7 +1883,46 @@
                 </div>
             </div>
         </section>
-        <!-- Introduction Section -->
+        <section class="introduction content-section">
+            <h2>Comprehensive Evaluation Framework</h2>
+            <div class="chart-showcase clean-card animate-on-scroll">
+                <div id="sunburst-chart"></div>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card clean-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Comprehensive Benchmarks</h3>
+                    <p>22 benchmarks, 149 tasks, covering general, faithfulness, retrieval, reasoning, generation, and specialized</p>
+                </div>
+                
+                <div class="feature-card clean-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Inference Augmentation</h3>
+                    <p>11 accelerations, covering token eviction, quantization, token merge and sparse attention.</p>
+                </div>
+                
+                <div class="feature-card clean-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>Low Code<br>Interactive</h3>
+                    <p>Diverse deployment server, Local WebUI, Low-code command line.</p>
+                </div>
+                
+                <div class="feature-card clean-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Custom<br>Evaluation</h3>
+                    <p>LOOMBench, user-defined chat template and new benchmarks.</p>
+                </div>
+            </div>
+        </section>
+        
         <section id="benchmark-deployment" class="framework-exploration content-section">
             <!-- 整体框架容器 -->
             <div class="framework-header-container clean-card animate-on-scroll">
@@ -3583,14 +3622,20 @@
             });
         }
 
+        // 平滑滚动到section中央的函数
         function scrollToCenter(targetSelector) {
             const targetElement = document.querySelector(targetSelector);
             if (!targetElement) return;
+            
+            // 获取目标元素的位置信息
             const elementRect = targetElement.getBoundingClientRect();
             const elementTop = elementRect.top + window.pageYOffset;
             const elementHeight = elementRect.height;
             const windowHeight = window.innerHeight;
+            
             const targetScrollTop = elementTop + (elementHeight / 2) - (windowHeight / 2);
+            
+            // 平滑滚动
             window.scrollTo({
                 top: Math.max(0, targetScrollTop), // 确保不会滚动到负数位置
                 behavior: 'smooth'
@@ -3613,7 +3658,7 @@
             renderBenchmarkCards();
             renderImplementationCards();  
         });
-        let scrollDistance = 990; // 修改此值
+        let scrollDistance = 1000; // 修改此值
         document.addEventListener('keydown', function(e) {
             if (e.code === 'Space') {
                 e.preventDefault();
