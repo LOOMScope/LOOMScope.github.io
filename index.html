@@ -3578,7 +3578,6 @@
                 }
             });
         }
-        // Copy BibTeX Function
         function copyBibTeX() {
             const bibtex = document.getElementById('bibtex').textContent;
             navigator.clipboard.writeText(bibtex).then(() => {
@@ -3592,8 +3591,6 @@
                 }, 2000);
             });
         }
-
-        // Initialize Everything
         function initEventListeners() {
             document.querySelectorAll(".capability-btn").forEach(btn => {
                 btn.addEventListener("click", (e) => {
@@ -3604,8 +3601,6 @@
                 });
             });
         }
-        
-        // Scroll animation observer
         function observeElements() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
