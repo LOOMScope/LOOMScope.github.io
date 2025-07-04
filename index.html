@@ -125,6 +125,7 @@
     box-shadow: var(--shadow-md);            
 } */
         .hero {
+            
             max-width: 1150px;
             text-align: center;
             background: white;
@@ -136,7 +137,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: auto;
+            margin: 10px auto 0 auto;
             overflow: hidden;
             box-shadow: 
                 inset 0 8px 6px -6px rgba(0, 0, 0, 0.1),
@@ -343,6 +344,7 @@
             overflow: hidden;
             transition: transform 0.5s ease, box-shadow 0.5s ease;
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            margin-top: 100px;
         }
         .video-showcase h2 {
             font-size: clamp(1.75rem, 4vw, 2.25rem);
@@ -442,7 +444,7 @@
             text-align: center;
             background: var(--neutral-100);
             border-radius: var(--radius-lg);
-            min-height: 300px;
+            min-height: 400px;
         }
 
         .video-fallback i {
@@ -533,6 +535,8 @@
             animation: popIn 0.6s forwards;
             position: relative;
             overflow: hidden;
+            text-decoration: none;
+            cursor: pointer;
         }
 
         /* 科技感边框动画 */
@@ -588,6 +592,7 @@
         .hero-feature:nth-child(4) { animation-delay: 1.2s; }
 
         .hero-feature:hover {
+            transform: translateY(-3px);
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
             border-color: var(--primary-green);
@@ -733,7 +738,20 @@
             box-shadow: var(--shadow-lg);
             transition: transform 0.5s ease, box-shadow 0.5s ease;
         }
-
+        .chart-showcase h2{
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            /* color: var(--accent-mint); */ /* 删除这行 */
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            text-align: center;
+            
+            /* 添加渐变色 */
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-mint));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
         .chart-showcase:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-xl);
@@ -772,16 +790,16 @@
         }
 
         .feature-icon {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(135deg, var(--primary-green), var(--accent-mint));
             border-radius: var(--radius-lg);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 1rem;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             box-shadow: var(--shadow-md);
             transition: var(--transition);
         }
@@ -791,10 +809,10 @@
         }
 
         .feature-card h3 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             transition: var(--transition);
         }
 
@@ -804,8 +822,10 @@
 
         .feature-card p {
             color: var(--text-secondary);
-            line-height: 1.6;
-            font-size: 0.95rem;
+            line-height: 1.5; /* 减小行高 */
+            font-size: 0.9rem; /* 减小字体 */
+            margin: 0;
+            flex: 1; /* 让文本占据剩余空间 */
         }
 
         .image-caption {
@@ -1478,12 +1498,14 @@
                 justify-content: center;
             }
         }
+        
         /* Demo Video Section - 覆盖Tailwind类并美化 */
         .introduction.content-section.mt-20 {
             min-height: auto vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 40px auto 0 auto;  
         }
 
         #demo-video {
@@ -1491,6 +1513,7 @@
             width: 150%;
             max-width: 1200px;
             margin: 0 auto;
+            min-height: 900px; 
             padding: 3rem;
             background: white;
             border-radius: var(--radius-xl);
@@ -1678,7 +1701,7 @@
             opacity: 1;
             transform: rotate(180deg);
         }
-        }
+        
     </style>
 </head>
 <body>
@@ -1701,29 +1724,29 @@
             
             <div class="hero-content">
                 <h1><span class="title-main">LOOM-Scope：LOng-cOntext Model evaluation framework</span></h1>
-                <h2>Next-generation framework for comprehensive long-context model evaluation with cutting-edge visualization and analysis tools</h2>
+                <h2>Comprehensive and Efficient Long-context Model Evaluation Framework</h2>
                 
                 <div class="hero-features">
-                    <div class="hero-feature">
+                    <a href="#benchmark-deployment" class="hero-feature">
                         <i class="fas fa-layer-group"></i>
-                        <span>21 Benchmarks</span>
-                    </div>
-                    <div class="hero-feature">
+                        <span>22 Benchmarks</span>
+                    </a>
+                    <a href="#benchmark-deployment" class="hero-feature">
                         <i class="fas fa-bolt"></i>
-                        <span>12 Accelerations</span>
-                    </div>
-                    <div class="hero-feature">
+                        <span>11 Accelerations</span>
+                    </a>
+                    <a href="#demo-video" class="hero-feature">
                         <i class="fas fa-code"></i>
-                        <span>One-line Setup</span>
-                    </div>
-                    <div class="hero-feature">
+                        <span>Low-Code</span>
+                    </a>
+                    <a href="#LOOMBench Leaderboard" class="hero-feature">
                         <i class="fas fa-check-circle"></i>
-                        <span>Validated Results</span>
-                    </div>
+                        <span>LOOMBench</span>
+                    </a>
                 </div>
                 
                 <div class="nav-buttons">
-                    <a href="#" class="button primary">
+                    <a href="https://github.com/LCM-Lab/LOOM-Scope" class="button">
                         <i class="fas fa-file-alt"></i>
                         Research Paper
                     </a>
@@ -1746,12 +1769,12 @@
                     LOOM-Scope Demonstration
                 </h2>
                 <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">
-                    Watch our comprehensive demonstration showcasing the complete evaluation workflow and interactive capabilities
+                    Low-code interactive with LOOM-Scope
                 </p>
                 <div class="video-container rounded-xl overflow-hidden shadow-2xl transform transition-all duration-300 hover:shadow-3xl">
                     <video 
                         width="100%" 
-                        height="auto" 
+                        height="150%" 
                         controls 
                         preload="metadata"
                         poster="">
@@ -1761,25 +1784,13 @@
                         </div>
                     </video>
                 </div>
-                <div class="video-info mt-6 text-center">
-                    <p class="video-description text-gray-700 text-lg">
-                        Comprehensive walkthrough of LOOM-Scope's benchmark suite and performance analytics
-                    </p>
-                </div>
             </div>
         </section>
         <!-- Introduction Section -->
         <section class="introduction content-section">
-            <div class="section-header animate-on-scroll">
+            <div class="chart-showcase clean-card animate-on-scroll">
                 <h2>Comprehensive Evaluation Framework</h2>
-                <p>LOOM-Scope provides a unified platform for rigorous long-context model assessment with cutting-edge benchmarks and performance analytics</p>
-            </div>
-            
-            <div class="chart-showcase clean-card animate-on-scroll" style="margin-bottom: 3rem;">
-                <div id="sunburst-chart" style="width: 100%; height: 500px;"></div>
-                <p class="image-caption">
-                    Interactive benchmark taxonomy visualization showcasing LOOM-Scope's comprehensive evaluation coverage
-                </p>
+                <div id="sunburst-chart"></div>
             </div>
 
             <div class="feature-grid">
@@ -1787,38 +1798,38 @@
                     <div class="feature-icon">
                         <i class="fas fa-layer-group"></i>
                     </div>
-                    <h3>Comprehensive Suite</h3>
-                    <p>21 standard long-context benchmarks covering faithfulness, retrieval, reasoning, generation, and specialized tasks with hundreds of subtasks.</p>
+                    <h3>Comprehensive Benchmarks</h3>
+                    <p>22 benchmarks, 149tasks,  covering general, faithfulness, retrieval, reasoning, generation, and specialized </p>
                 </div>
                 
                 <div class="feature-card clean-card animate-on-scroll">
                     <div class="feature-icon">
                         <i class="fas fa-bolt"></i>
                     </div>
-                    <h3>High Performance</h3>
-                    <p>12 acceleration methods including CakeKV and FlexPrefill, optimized for GPU hardware from 3090 to H20 with vLLM integration.</p>
+                    <h3>Inference Augmentation</h3>
+                    <p>11 accelerations，covering token eviction，quantization，token merge and sparse attention.</p>
                 </div>
                 
                 <div class="feature-card clean-card animate-on-scroll">
                     <div class="feature-icon">
                         <i class="fas fa-puzzle-piece"></i>
                     </div>
-                    <h3>Easy Integration</h3>
-                    <p>Single-line command workflow with automatic dataset/model detection, supporting Transformers, Mamba, and RWKV architectures.</p>
+                    <h3> Low Code    <br>                         Interactive    </h3>
+                    <p>Diverse deployment server, Local WebUI, Low-code command line.</p>
                 </div>
                 
                 <div class="feature-card clean-card animate-on-scroll">
                     <div class="feature-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3>Reproducible Results</h3>
-                    <p>Cross-platform consistency with public computational cost documentation and HuggingFace PEFT adapter support.</p>
+                    <h3>   Custom     <br>   Evaluation     </h3>
+                    <p>LOOMBench, user-defined chat template and new benchmarks.</p>
                 </div>
             </div>
         </section>
-        <section class="framework-exploration content-section">
+        <section id="benchmark-deployment" class="framework-exploration content-section">
             <div class="section-header animate-on-scroll">
-                <h2>Framework Exploration</h2>
+                <h2>Benchmark & Deployment Method</h2>
                 <p>Comprehensive benchmark suite and implementation methods for long-context model evaluation</p>
             </div>
             
@@ -1865,10 +1876,9 @@
         </section>
         
         <!-- Model Leaderboard Section -->
-        <section class="evaluation content-section">
+        <section id="LOOMBench Leaderboard" class="evaluation content-section">
             <div class="section-header animate-on-scroll">
-                <h2>Performance Leaderboard</h2>
-                <p>Comprehensive model rankings across six critical capabilities with real-time filtering and detailed performance analytics</p>
+                <h2>LOOMBench Leaderboard</h2>
             </div>
             
             <div class="capability-controls animate-on-scroll">
@@ -1941,8 +1951,7 @@
         <!-- Benchmark Validation Section -->
         <section class="evaluation content-section">
             <div class="section-header animate-on-scroll">
-                <h2>Validation & Reproducibility</h2>
-                <p>Scientific validation through direct comparison with official benchmark results, ensuring research integrity and reproducibility</p>
+                <h2>Validation With Official Results</h2>
             </div>
             
             <div class="table-container animate-on-scroll">
@@ -2085,7 +2094,7 @@
                         </tr>
                         <tr>
                             <td>LongHealth</td>
-                            <td><span class="model-label Other">longchat-7b-v1.5-32k</span></td>
+                            <td><span class="model-label GLM">longchat-7b-v1.5-32k</span></td>
                             <td><strong style="color: var(--primary-green);">11.8</strong></td>
                             <td>9.6</td>
                             <td style="color: #E74C3C;">+2.6</td>
@@ -2120,8 +2129,22 @@
                             <td style="color: var(--secondary-green);">+4.19</td>
                         </tr>
                     </tbody>
+                    
                 </table>
+            </div> 
+            <div class="legend animate-on-scroll">               
+                <div class="legend-item">                     
+                    <div class="legend-color Llama"></div>                     
+                    <span>Llama Model Series</span>                 
+                </div>
+                <div class="legend-item">                     
+                    <div class="legend-color GLM"></div>                     
+                    <span>GLM Model Series</span>                 
+                </div>
+      
+            </div>    
         </section>
+        
         <!-- Citation Section -->
         <section class="citation content-section">
             <div class="section-header animate-on-scroll">
@@ -2133,15 +2156,15 @@
                 <button class="copy-button" onclick="copyBibTeX()">
                     Copy BibTeX
                 </button>
-                <pre id="bibtex">@misc{loom_scope_2025,
-    title={LOOM-Scope: LOng-cOntext Model evaluation framework}, 
-    author={Anonymous Authors},
-    year={2025},
-    eprint={2504.19093},
-    archivePrefix={arXiv},
-    primaryClass={cs.CR},
-    url={https://example.com/loom-scope}, 
-}</pre>
+                <pre id="bibtex">
+                    @misc{loom_scope_2025,
+                    title={LOOM-Scope: a comprehensive and efficient LOng-cOntext Model evaluation framework},
+                    author={Zecheng Tang and Haitian Wang and Quantong Qiu and Baibei Ji and Ruoxi Sun and Keyan Zhou and Juntao Li and Min Zhang},
+                    year={2025},
+                    institution={Soochow University, China},
+                    note={Key Laboratory of Data Intelligence and Advanced Computing, Soochow University},
+                    url={https://github.com/LCM-Lab/LOOM-Scope}}
+                </pre>
             </div>
         </section>
     </main>
@@ -2767,7 +2790,7 @@
             ],
             capabilities: {
                 "overview": {
-                    "description": "Comprehensive analysis of model performance across all evaluation dimensions with detailed capability breakdowns.",
+                    "description": "Comprehensive analysis of model performance across all evaluation dimensions.",
                     "columns": [
                         { name: "Rank", type: "fixed", sortable: true },
                         { name: "Model", type: "fixed", sortable: false },
