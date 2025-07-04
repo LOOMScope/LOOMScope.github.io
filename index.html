@@ -3593,10 +3593,7 @@
             const elementTop = elementRect.top + window.pageYOffset;
             const elementHeight = elementRect.height;
             const windowHeight = window.innerHeight;
-            
             const targetScrollTop = elementTop + (elementHeight / 2) - (windowHeight / 2);
-            
-            // 平滑滚动
             window.scrollTo({
                 top: Math.max(0, targetScrollTop), // 确保不会滚动到负数位置
                 behavior: 'smooth'
